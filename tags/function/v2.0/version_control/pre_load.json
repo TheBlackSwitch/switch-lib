@@ -1,0 +1,4 @@
+{
+    "values": [],
+    "comment": "runs just before the main load pipeline, after we have collected the latest patch number. Useful for pre-initializing stuff for other datapacks"
+}

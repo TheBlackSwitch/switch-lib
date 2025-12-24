@@ -1,0 +1,6 @@
+{
+    "values": [
+        "theblackswitch:v2.0.0/version_control/set_patch"
+    ],
+    "comment": "Go trough every instance and search for the latest patch number"
+}
