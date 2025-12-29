@@ -1,21 +1,28 @@
+# if the tick function is still running, reset it and evaluate if this is still the latest version
+schedule clear theblackswitch:v2.0/patch-0/tick
 
+execute unless function theblackswitch:v2.0/patch-0/version_control/is_latest run return fail
 
-##Reset Versions:
-data remove storage theblackswitch:versions lib
-data remove storage theblackswitch:versions packs
+# Check for debug players
+scoreboard players set #tbs-v2.0.debug_enabled tbs.server_data 0
+execute if entity @a[tag=tbs.debug] run scoreboard players set #tbs-v2.0.debug_enabled tbs.server_data 1
 
-##Init tick function
-function theblackswitch:version_control/init
+# Debug startup message
+execute if score #tbs-v2.0.debug_enabled tbs.server_data matches 1 run tellraw @a[tag=tbs.debug] ["",{"text":"[Debug]: ","color":"yellow"},{"text":" Switch-Lib v2.0 patch-0 loaded!"}]
 
-##Inits
+# Inits
 function theblackswitch:player_id/init
 function theblackswitch:slow_tick/init
-function theblackswitch:easing/internal/load
+#function theblackswitch:easing/internal/load
 
-##scoreboards
+# scoreboards
 scoreboard objectives add temp dummy
 scoreboard objectives add tbs.server_data dummy
-scoreboard objectives add math dummy
+scoreboard objectives add tbs.math dummy
 
-team add no_collide
+# useful teams
+team add tbs.no_collide
 team modify no_collide collisionRule never
+
+# this is the latest version so we can start the tick function
+schedule function theblackswitch:v2.0/patch-0/tick 1t

@@ -1,0 +1,10 @@
+{
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:tick"
+        }
+    },
+    "rewards": {
+        "function": "theblackswitch:v2.0/patch-0/player_id/assign_id"
+    }
+}
