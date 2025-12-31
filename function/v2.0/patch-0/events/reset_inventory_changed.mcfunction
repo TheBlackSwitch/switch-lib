@@ -1,1 +1,0 @@
-advancement revoke @s only theblackswitch:v2.0/patch-0/events/inventory_changed
