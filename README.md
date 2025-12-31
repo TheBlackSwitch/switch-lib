@@ -4,8 +4,6 @@ Also Check Out my other projects at [theblackswitch.com](https://theblackswitch.
 
 ---
 
-# 
-
 # 📝Pack Description:
 This is a library datapack which contains code that is included in almost all my datapacks!
 It's located under the namespace ``theblackswitch`` and contains code that would otherwise 

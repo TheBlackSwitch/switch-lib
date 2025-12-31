@@ -140,7 +140,7 @@ def function_version_check(ctx: Context):
                 resolve_occurances = 0
 
                 for l in file_data['file'].lines:
-                    if "@resolve" in l:
+                    if "@resolve-here" in l:
                         resolve_occurances += 1
                         # replace the first @resolve with the version check command
                         if not vers_check:
