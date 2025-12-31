@@ -1,0 +1,31 @@
+{
+    "data_pack": {
+        "load": ["src"],
+        "name": "Switch Lib"
+    },
+    "pipeline": [
+        "plugins.version_resolution",
+        "plugins.debug_lines"
+    ],
+    "id": "theblackswitch",
+    "name": "theblackswitch",
+    "description": "A useful datapack library that I use for almost all my projects",
+    "version": "2.0.0",
+    "require": [
+        "bolt",
+        "bolt_expressions"
+    ],
+    "output": "build",
+    "meta": {
+        "bolt": {
+            "entrypoint": ["theblackswitch:main"]
+        },
+        "version_resolution": {
+            "function_version_check": "execute unless function theblackswitch:version_control/is_latest run return fail",
+            "comment": [
+                "The above is the command used to check if the current instance of the file is the latest.",
+                "This runs before resolving refrences so you don't need to add the version to this path"
+            ] 
+        }
+    }
+}
