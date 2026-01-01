@@ -1,5 +1,3 @@
-execute unless function theblackswitch:v2.0/patch-0/version_control/is_latest run return fail
-
 execute unless score #tbs-v2.0.enabled.slow_tick tbs.server_data matches 1 run return fail
 
 ##Add 1 to all slow_ticks

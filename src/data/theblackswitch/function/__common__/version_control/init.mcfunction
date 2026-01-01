@@ -1,5 +1,4 @@
-
-@noresolve # don't do version resolution in this function or change it's path in any refrences
+@noresolve @noverify # don't resolve this function to a version or verify it's version
 
 scoreboard objectives add tbs.version_control dummy
 scoreboard players reset * tbs.version_control

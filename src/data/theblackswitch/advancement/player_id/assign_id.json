@@ -5,6 +5,6 @@
         }
     },
     "rewards": {
-        "function": "#theblackswitch:__common__/version_control/init"
+        "function": "theblackswitch:player_id/assign_id"
     }
 }

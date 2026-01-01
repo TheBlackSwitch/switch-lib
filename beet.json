@@ -4,8 +4,9 @@
         "name": "Switch Lib"
     },
     "pipeline": [
+        "plugins.debug_lines",
         "plugins.version_resolution",
-        "plugins.debug_lines"
+        "mecha"
     ],
     "id": "theblackswitch",
     "name": "theblackswitch",
@@ -23,9 +24,13 @@
         "version_resolution": {
             "function_version_check": "execute unless function theblackswitch:version_control/is_latest run return fail",
             "comment": [
-                "The above is the command used to check if the current instance of the file is the latest.",
+                "The above is the command used to check if the current instance of the file is part of the latest patch",
                 "This runs before resolving refrences so you don't need to add the version to this path"
             ] 
+        },
+        "debug_lines": {
+            "prefix": "execute if score #tbs-$version$.debug_enabled tbs.server_data matches 1 run tellraw @a[tag=tbs.debug] [\"\",{\"text\":\"[Debug]: \",\"color\":\"yellow\",\"bold\":true},",
+            "suffix": "]"
         }
     }
 }

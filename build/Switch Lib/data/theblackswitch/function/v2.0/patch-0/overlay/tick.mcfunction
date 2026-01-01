@@ -1,6 +1,5 @@
 execute unless function theblackswitch:v2.0/patch-0/version_control/is_latest run return fail
 execute as @a[tag=tbs.used_overlay] at @s run function theblackswitch:v2.0/patch-0/overlay/internal/run
-
 item modify entity @a[tag=tbs.used_overlay] container.0 theblackswitch:v2.0/patch-0/overlay/reset_with_sound
 item modify entity @a[tag=tbs.used_overlay] container.1 theblackswitch:v2.0/patch-0/overlay/reset_with_sound
 item modify entity @a[tag=tbs.used_overlay] container.2 theblackswitch:v2.0/patch-0/overlay/reset_with_sound

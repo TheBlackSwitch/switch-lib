@@ -1,2 +1,4 @@
+@noverify
+
 # Increase the patch number if it is lower than this library instance's patch number
-execute unless score #2.0 tbs.version_control matches 1.. run scoreboard players set #2.0 tbs.version_control 0
+execute unless score #$version$ tbs.version_control matches ($patch-nbr$ + 1, None) run scoreboard players set #$version$ tbs.version_control $patch-nbr$

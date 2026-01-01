@@ -1,5 +1,5 @@
 {
     "values": [
-        {"id":"theblackswitch:v2.0/patch-0/player_storage/get","required":false}
+        {"id":"theblackswitch:player_storage/get","required":false}
     ]
 }

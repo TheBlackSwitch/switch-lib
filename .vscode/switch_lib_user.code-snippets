@@ -18,31 +18,98 @@
     // things for my library
 
     // Player ID system
-    "Search ID From Source [Switch Lib]": {
+    "movement backward_left": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/backward_left", "movement backward_left"],
+        "body": "if function #theblackswitch:v2.0/movement_check/backward_left",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement backward_right": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/backward_right", "movement backward_right"],
+        "body": "if function #theblackswitch:v2.0/movement_check/backward_right",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement backward": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/backward", "movement backward"],
+        "body": "if function #theblackswitch:v2.0/movement_check/backward",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement forward_left": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/forward_left", "movement forward_left"],
+        "body": "if function #theblackswitch:v2.0/movement_check/forward_left",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement forward_right": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/forward_right", "movement forward_right"],
+        "body": "if function #theblackswitch:v2.0/movement_check/forward_right",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement forward": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/forward", "movement forward"],
+        "body": "if function #theblackswitch:v2.0/movement_check/forward",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement jump": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/jump", "movement jump"],
+        "body": "if function #theblackswitch:v2.0/movement_check/jump",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement none": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/none", "movement none"],
+        "body": "if function #theblackswitch:v2.0/movement_check/none",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement right": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/right", "movement right"],
+        "body": "if function #theblackswitch:v2.0/movement_check/right",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement sneak": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/sneak", "movement sneak"],
+        "body": "if function #theblackswitch:v2.0/movement_check/sneak",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+    "movement sprint": {
+        "prefix": ["if function #theblackswitch:v2.0/movement_check/sprint", "movement sprint"],
+        "body": "if function #theblackswitch:v2.0/movement_check/sprint",
+        "description": "Switch-Lib [USER]: Check for movement buttons",
+        "scope": "mcfunction"
+    },
+
+    "Search ID From Source": {
         "prefix": [
-            ">> Search ID From Source",
-            ">> SIFS",
-            ">> Set Search ID"
+            "Search ID From Source",
+            "SIFS",
+            "Set Search ID"
         ],
         "body": "scoreboard players operation #search tbs.ID = ${1:<source>} tbs.ID",
-        "description": "Set the #search id from a source entity",
+        "description": "Switch-Lib [USER]: Set the #search id from a source entity",
         "scope": "mcfunction"
     },
-    "Search ID Set Target [Switch Lib]": {
+    "Search ID Set Target": {
         "prefix": [
-            ">> Search ID Set Target",
-            ">> SIST",
-            ">> Apply from Search ID"
+            "Search ID Set Target",
+            "SIST",
+            "Apply from Search ID"
         ],
         "body": "scoreboard players operation ${1:<target>} tbs.ID = #search tbs.ID",
-        "description": "Apply an id from #search to a target entity",
+        "description": "Switch-Lib [USER]: Apply an id from #search to a target entity",
         "scope": "mcfunction"
     },
-    "Search ID Check [Switch Lib]": {
+    "Search ID Check": {
         "prefix": [
-            ">> Search ID Check",
-            ">> SIC",
-            ">> Check Search ID"
+            "Search ID Check",
+            "SIC",
+            "Check Search ID"
         ],
         "scope": "mcfunction",
         "body": "${1|if predicate theblackswitch:matches_search_id,predicate=theblackswitch:matches_search_id,predicate=theblackswitch:matches_search_id\\,limit=1|}",
@@ -50,72 +117,72 @@
     },
 
     // slow ticks
-    "if slowtick [Switch Lib]": {
-        "prefix": [">> check slowtick",">> if score slowtick"],
+    "if slowtick": {
+        "prefix": ["check slowtick","if score slowtick"],
         "body": "if score ${1|#2,#3,#4,#5,#6,#7,#8,#9,#10,#18,#20,#22,#32,#40,#44,#60,#100,#160|} tbs.slow_tick matches ${2:1}",
         "scope": "mcfunction",
-        "description": "run a command every so often"
+        "description": "Switch-Lib [USER]: run a command every so often"
     },
-    "if random delay [Switch Lib]": {
-        "prefix": [">> random delay", ">> if score random delay"],
+    "if random delay": {
+        "prefix": ["random delay", "if score random delay"],
         "body": "if score ${1|#3,#5,#10,#20,#60,#160|} tbs.slow_tick = ${1|#3,#5,#10,#20,#60,#160|} tbs.random_delay",
         "scope": "mcfunction",
-        "description": "run a command every so often but at a random interval"
+        "description": "Switch-Lib [USER]: run a command every so often but at a random interval"
     },
 
     // player storage
-    "get player storage [Switch Lib]": {
-        "prefix": [">> get player storage"],
+    "get player storage": {
+        "prefix": ["get player storage"],
         "body": [
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
             "data modify storage ${1:theblackswitch:temp} player_storage.result set ${3:value}",
             "function #theblackswitch:v2.0/player_storage/get with storage ${1:theblackswitch:temp} player_storage"
         ],
-        "description": "Get data from the player's storage and put it in a result storage",
+        "description": "Switch-Lib [USER]: Get data from the player's storage and put it in a result storage",
         "scope": "mcfunction"
     },
-    "insert player storage [Switch Lib]": {
-        "prefix": [">> insert player storage"],
+    "insert player storage": {
+        "prefix": ["insert player storage"],
         "body": [
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
             "data modify storage ${1:theblackswitch:temp} player_storage.result set ${3:value}",
             "function #theblackswitch:v2.0/player_storage/insert with storage ${1:theblackswitch:temp} player_storage"
         ],
-        "description": "Get data from the player's storage and put it in any data consumer",
+        "description": "Switch-Lib [USER]: Get data from the player's storage and put it in any data consumer",
         "scope": "mcfunction"
     },
-    "remove player storage [Switch Lib]": {
-        "prefix": [">> remove player storage"],
+    "remove player storage": {
+        "prefix": ["remove player storage"],
         "body": [
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
             "function #theblackswitch:v2.0/player_storage/remove with storage ${1:theblackswitch:temp} player_storage"
         ],
-        "description": "Remove data from the player's storage",
+        "description": "Switch-Lib [USER]: Remove data from the player's storage",
         "scope": "mcfunction"
     },
-    "Set value player storage [Switch Lib]": {
-        "prefix": [">> Set value player storage"],
+    "Set value player storage": {
+        "prefix": ["Set value player storage"],
         "body": [
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
             "data modify storage ${1:theblackswitch:temp} player_storage.value set ${3:value}",
             "function #theblackswitch:v2.0/player_storage/set_value with storage ${1:theblackswitch:temp} player_storage"
         ],
-        "description": "Store a certain value into the player's storage",
+        "description": "Switch-Lib [USER]: Store a certain value into the player's storage",
         "scope": "mcfunction"
     },
-    "Set from player storage [Switch Lib]": {
-        "prefix": [">> Set from player storage"],
+    "Set from player storage": {
+        "prefix": ["Set from player storage"],
         "body": [
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
             "data modify storage ${1:theblackswitch:temp} player_storage.source set ${3:value}",
             "function #theblackswitch:v2.0/player_storage/set_from with storage ${1:theblackswitch:temp} player_storage"
         ],
-        "description": "Get data from a source and store it in the player's storage",
+        "description": "Switch-Lib [USER]: Get data from a source and store it in the player's storage",
         "scope": "mcfunction"
     }
 }

@@ -18,10 +18,55 @@
     // Some nice to have snippets
 
     "debug_message": {
-        "prefix": [">> debug"],
-        "body": "execute if score #tbs-$version$.debug_enabled tbs.server_data matches 1 run tellraw @a[tag=tbs.show_debug] ${1:[{\"text\":\"[Debug]: \",\"color\":\"yellow\"},{\"text\":\"\"}]}",
+        "prefix": ["debug"],
+        "body": "@debug << ",
         "description": "Switch-Lib [DEV]: insert a line to print some debug text if requested by the user",
         "scope": "mcfunction"
+    },
+    "$version$": {
+        "prefix": ["$version$","version"],
+        "body": "\\$version\\$",
+        "description": "Switch-Lib [DEV]: insert a version alias EG: v2.0"
+    },
+    "$patch$": {
+        "prefix": ["$patch$","patch"],
+        "body": "\\$patch\\$",
+        "description": "Switch-Lib [DEV]: insert a patch alias EG: patch-0"
+    },
+    "$patch-nbr$": {
+        "prefix": ["$patch-nbr$","patch-nbr"],
+        "body": "\\$patch-nbr\\$",
+        "description": "Switch-Lib [DEV]: insert a patch number alias EG: 0"
+    },
+    "don't resolve a refrence": {
+        "prefix": ["$@$","@"],
+        "body": "$@$",
+        "description": "Switch-Lib [DEV]: leave the refrence alone please!",
+        "scope": "mcfunction"
+    },
+    "@verify": {
+        "prefix": ["@verify","verify"],
+        "body": "@verify",
+        "description": "Switch-Lib [DEV]: verify the function version here instead of at the top",
+        "scope": "mcfunction"
+    },
+    "@noresolve": {
+        "prefix": ["@noresolve","noresolve"],
+        "body": "@noresolve",
+        "description": "Switch-Lib [DEV]: don't resolve this function!",
+        "scope": "mcfunction"
+    },
+    "@noverify": {
+        "prefix": ["@noverify","noverify"],
+        "body": "@noverify",
+        "description": "Switch-Lib [DEV]: don't resolve this function!",
+        "scope": "mcfunction"
+    },
+    "noresolve json": {
+        "prefix": ["noresolve","resolve: false"],
+        "body": "\"resolve\":false",
+        "description": "Switch-Lib [DEV]: don't resolve this file!",
+        "scope": "json"
     }
 
 }

@@ -1,4 +1,4 @@
-execute unless function theblackswitch:v2.0/patch-0/version_control/is_latest run return fail
+execute unless function theblackswitch:version_control/is_latest run return fail
 
 data modify storage theblackswitch:player_storage players append value {}
 

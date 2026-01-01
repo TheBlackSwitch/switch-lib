@@ -1,5 +1,5 @@
 {
     "values": [
-        {"id":"theblackswitch:v2.0/patch-0/slow_tick/enable", "required": false}
+        {"id":"theblackswitch:slow_tick/enable", "required": false}
     ]
 }
