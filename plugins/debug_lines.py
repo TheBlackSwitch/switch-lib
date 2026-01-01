@@ -47,8 +47,6 @@ def beet_default(ctx: Context):
             for line in function.lines:
                 if re.search(r"@debug *<< *", line):
                     result = re.sub(r"@debug *<< *", prefix, line)
-                    result = result.replace("[{","{")
-                    result = result.replace("}]","}")
                     result += suffix
                     function.lines[curr_line] = result
                 curr_line+=1
