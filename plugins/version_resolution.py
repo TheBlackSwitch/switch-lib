@@ -311,11 +311,14 @@ def resolve_refrences(ctx: Context):
                     result = l
 
                     # Handle the function command in functions
-                    result = resolve_with_regex(fr"(function|clear )({lib_namespace}):(.*)", result, file_data['name'], check_file_type=True, file_type=Function)
-                    result = resolve_with_regex(fr"(function|clear )(#{lib_namespace}):(.*)", result, file_data['name'], check_file_type=True, file_type=FunctionTag)
+                    result = resolve_with_regex(fr"(function |clear )({lib_namespace}):([^\s]*)", result, file_data['name'], check_file_type=True, file_type=Function)
+                    result = resolve_with_regex(fr"(function |clear )(#{lib_namespace}):([^\s]*)", result, file_data['name'], check_file_type=True, file_type=FunctionTag)
 
                     # make sure to ignore storages
-                    result = re.sub(rf"(storage )({lib_namespace}):(.*)", rf"\g<1>\g<2>$@$:\g<3>", result)
+                    result = re.sub(rf"(\"?storage\"?:? *?\"?)(theblackswitch):([^\s\"]*\"?)", rf"\g<1>\g<2>$@$:\g<3>", result)
+
+                    # ignore set value
+                    result = re.sub(rf"(\"?value\"? *?\"?)({lib_namespace}):([^\s\"]*\"?)", rf"\g<1>\g<2>$@$:\g<3>", result)
 
                     # handle other refrence types
                     result = resolve_with_regex(fr"()({lib_namespace}):([^\s\"]+)", result, file_data['name'])
@@ -328,12 +331,12 @@ def resolve_refrences(ctx: Context):
                 cont = json.dumps(file_data['file'].get_content())
 
                 # the function command
-                cont = resolve_with_regex(fr"(?:function|clear )({lib_namespace}):(.*)", cont, file_data['name'], check_file_type=True, file_type=Function)
-                cont = resolve_with_regex(fr"(?:function|clear )(#{lib_namespace}):(.*)", cont, file_data['name'], check_file_type=True, file_type=FunctionTag)
+                cont = resolve_with_regex(fr"(function |clear )({lib_namespace}):([^\s]*)", cont, file_data['name'], check_file_type=True, file_type=Function)
+                cont = resolve_with_regex(fr"(function |clear )(#{lib_namespace}):([^\s]*)", cont, file_data['name'], check_file_type=True, file_type=FunctionTag)
 
                 # resolve other function refrences
-                cont = resolve_with_regex(f"(\"?function\"?: *?\")({lib_namespace}):([^\"]*)", cont, file_data['name'], check_file_type=True, file_type=Function)
-                cont = resolve_with_regex(f"(\"?function\"?: *?\")(#{lib_namespace}):([^\"]*)", cont, file_data['name'], check_file_type=True, file_type=FunctionTag)
+                cont = resolve_with_regex(fr"(\"?function\"?: *?\")({lib_namespace}):([^\"\s]*)", cont, file_data['name'], check_file_type=True, file_type=Function)
+                cont = resolve_with_regex(fr"(\"?function\"?: *?\")(#{lib_namespace}):([^\"\s]*)", cont, file_data['name'], check_file_type=True, file_type=FunctionTag)
                 
                 # resolve all refrences to other files (like advancements)
                 #cont = resolve_with_regex(r"()([^\s\"@]+?):([^\s\"]+)", cont, file_data['name'])
