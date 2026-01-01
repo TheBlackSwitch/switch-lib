@@ -140,7 +140,7 @@ def function_version_check(ctx: Context):
                 resolve_occurances = 0
 
                 for l in file_data['file'].lines:
-                    if "@resolve-here" in l:
+                    if "@resolve" in l:
                         resolve_occurances += 1
                         # replace the first @resolve with the version check command
                         if not vers_check:
@@ -176,14 +176,14 @@ def resolve_aliases(ctx: Context):
                 for i in range(len(file_data['file'].lines)):
                     file_data['file'].lines[i] = file_data['file'].lines[i].replace("$version$", f"v{version['major']}.{version['minor']}")
                     file_data['file'].lines[i] = file_data['file'].lines[i].replace("$patch$", f"patch-{version['patch']}")
-                    file_data['file'].lines[i] = file_data['file'].lines[i].replace("$patch-nbr$", f"patch-{version['patch']}")
+                    file_data['file'].lines[i] = file_data['file'].lines[i].replace("$patch-nbr$", str(version['patch']))
                     file_data['file'].lines[i] = file_data['file'].lines[i].replace("$@$", "")
 
             elif file_data['file'].extension == ".json":
                 cont = json.dumps(file_data['file'].get_content())
                 cont = cont.replace("$version$", f"v{version['major']}.{version['minor']}")
+                cont = cont.replace("$patch-nbr$", str(version['patch']))
                 cont = cont.replace("$patch$", f"patch-{version['patch']}")
-                cont = cont.replace("$patch-nbr$", f"{version['patch']}")
                 cont = cont.replace("$@$", "")
                 file_data['file'].set_content(json.loads(cont))
 
