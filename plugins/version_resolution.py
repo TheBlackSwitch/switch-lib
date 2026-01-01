@@ -97,14 +97,28 @@ def find_files(ctx: Context):
     try:
         for file_type in ctx.data[lib_namespace].keys():
             for name, file in ctx.data[lib_namespace][file_type].items():
+
                 should_resolve = True
+                should_verify = True
+
                 if file_type == Function:
+
+                    # check if this function should be resolved
                     for i in file.lines: # type: ignore
                         if "@noresolve" in i:
                             file.lines.remove(i) # type: ignore
                             should_resolve = False
                             break
+
+                    # check if this function should be version checked
+                    for i in file.lines: # type: ignore
+                        if "@noverify" in i:
+                            file.lines.remove(i) # type: ignore
+                            should_verify = False
+                            break
+
                 elif file.extension == ".json":
+
                     if "resolve" in file.data: # type: ignore
                         if not file.data["resolve"]: # type: ignore
                             should_resolve = False
@@ -114,7 +128,8 @@ def find_files(ctx: Context):
                     "type": file_type,
                     "name": name,
                     "file": file,
-                    "resolve": should_resolve
+                    "resolve": should_resolve,
+                    "verify": should_verify
                 })
     except Exception as e:
         print(bcolors.FAIL + "An exception occured whilst searching for resolvable files!")
@@ -127,7 +142,7 @@ def function_version_check(ctx: Context):
     """Make sure each function only runs in the newest instance"""
 
     for file_data in datapack_files:
-        if file_data['type'] == Function and file_data['resolve']:
+        if file_data['type'] == Function and file_data['verify']:
                 
             try:
                 if "version_resolution" in ctx.meta and "function_version_check" in ctx.meta["version_resolution"]:
@@ -140,17 +155,17 @@ def function_version_check(ctx: Context):
                 resolve_occurances = 0
 
                 for l in file_data['file'].lines:
-                    if "@resolve" in l:
+                    if "@verify" in l:
                         resolve_occurances += 1
-                        # replace the first @resolve with the version check command
+                        # replace the first @verify with the version check command
                         if not vers_check:
                             file_data['file'].lines[i] = resolve_version
                             vers_check = True
                     i+=1
                 
-                # throw an error when there are multiple @resolve aliases found
+                # throw an error when there are multiple @verify aliases found
                 if resolve_occurances > 1:
-                    raise Exception(f"Allowed only zero or one occurances of @resolve, found {resolve_occurances}")
+                    raise Exception(f"No more than one occurance of @verify may be present, found {resolve_occurances}")
                 
                 if not vers_check:
                     file_data['file'].lines.insert(0, resolve_version)
@@ -261,25 +276,31 @@ def resolve_refrences(ctx: Context):
                             
                         if not "$@$" in value:
                             # first check for other function tag refrences (they shouldn't have the patch in their path)
-                            if "#" in value:
+                            namespace = value.split(":")[0]
+                            path = value.split(":")[1]
+
+                            if namespace == f"#{lib_namespace}":
                                 
-                                file_data['file'].data['values'][i] = resolve_single_refrence(value.split(":")[1], file_data['name'], is_tag=True, check_file_type=True, file_type=FunctionTag)
+                                file_data['file'].data['values'][i] = resolve_single_refrence(path, file_data['name'], is_tag=True, check_file_type=True, file_type=FunctionTag)
 
                             # other normal function refrences should contain the patch in their name
-                            else:
-                                file_data['file'].data['values'][i] = resolve_single_refrence(value.split(":")[1], file_data['name'], is_tag=True, check_file_type=True, file_type=Function)
+                            elif namespace == lib_namespace:
+                                file_data['file'].data['values'][i] = resolve_single_refrence(path, file_data['name'], is_tag=True, check_file_type=True, file_type=Function)
                                 
                     # Json style refrences in the tag {"id":"value","required":true|false}
                     elif not "$@$" in value['id']:
                         if not ":" in value['id']:
                             raise Exception(f"No namespace was found in value: {value}")
+                        
+                        namespace = value['id'].split(":")[0]
+                        path = value['id'].split(":")[1]
 
                         # first check for other function tag refrences (they shouldn't have the patch in their path)
-                        if 'id' in value and f"#{lib_namespace}:" in value['id']:
+                        if 'id' in value and namespace == f"#{lib_namespace}":
                             file_data['file'].data['values'][i]['id'] = resolve_single_refrence(value['id'].split(":")[1], file_data['name'], is_tag=True, check_file_type=True, file_type=FunctionTag)
 
                         # other normal function refrences should contain the patch in their name
-                        elif 'id' in value and f"{lib_namespace}:" in value['id']:
+                        elif 'id' in value and namespace == f"{lib_namespace}":
                             file_data['file'].data['values'][i]['id'] = resolve_single_refrence(value['id'].split(":")[1], file_data['name'], is_tag=False, check_file_type=True, file_type=Function)
                     i+=1                
 
