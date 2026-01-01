@@ -314,6 +314,9 @@ def resolve_refrences(ctx: Context):
                     result = resolve_with_regex(fr"(function|clear )({lib_namespace}):(.*)", result, file_data['name'], check_file_type=True, file_type=Function)
                     result = resolve_with_regex(fr"(function|clear )(#{lib_namespace}):(.*)", result, file_data['name'], check_file_type=True, file_type=FunctionTag)
 
+                    # make sure to ignore storages
+                    result = re.sub(rf"(storage )({lib_namespace}):(.*)", rf"\g<1>\g<2>$@$:\g<3>", result)
+
                     # handle other refrence types
                     result = resolve_with_regex(fr"()({lib_namespace}):([^\s\"]+)", result, file_data['name'])
 
