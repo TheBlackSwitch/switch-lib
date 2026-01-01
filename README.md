@@ -25,7 +25,7 @@ to write datapack features faster since I don't have to re-invent the wheel ever
 - A newtonian approximation algorithm for a square root
 
 # 🖥️For developers:
-    If you want to use this library or contribute, you can take a look at the [wiki](https://github.com/TheBlackSwitch/switch-lib/wiki/Home)
+If you want to use this library or contribute, you can take a look at the [wiki](https://github.com/TheBlackSwitch/switch-lib/wiki/Home)
 
 # 📜License
 theblackswitch datapack-common-code © 2025 by theblackswitch is licensed under Creative Commons Attribution No Derivatives 4.0 International
