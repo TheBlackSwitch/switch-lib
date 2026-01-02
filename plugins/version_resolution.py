@@ -6,7 +6,7 @@
 ## Imports
 #-------------------------------------------------------
 
-from beet import Context, DataPack, Function,  FunctionTag, TagFile, ItemModifier, LootTable
+from beet import Context, DataPack, Function,  FunctionTag, TagFile, Advancement
 import json as json
 import re
 
@@ -79,6 +79,7 @@ def beet_default(ctx: Context):
 
     find_files(ctx)
     function_version_check(ctx)
+    advancement_version_check(ctx)
     resolve_refrences(ctx)
     resolve_aliases(ctx)
     move_files(ctx)
@@ -123,6 +124,11 @@ def find_files(ctx: Context):
                         if not file.data["resolve"]: # type: ignore
                             should_resolve = False
                         del file.data["resolve"] # type: ignore
+
+                    if "verify" in file.data: # type: ignore
+                        if not file.data["verify"]: # type: ignore
+                            should_verify = False
+                        del file.data["verify"] # type: ignore
             
                 datapack_files.append({
                     "type": file_type,
@@ -131,6 +137,7 @@ def find_files(ctx: Context):
                     "resolve": should_resolve,
                     "verify": should_verify
                 })
+
     except Exception as e:
         print(bcolors.FAIL + "An exception occured whilst searching for resolvable files!")
         print("Exception: " + str(e) + bcolors.ENDC)
@@ -145,10 +152,10 @@ def function_version_check(ctx: Context):
         if file_data['type'] == Function and file_data['verify']:
                 
             try:
-                if "version_resolution" in ctx.meta and "function_version_check" in ctx.meta["version_resolution"]:
-                    resolve_version = ctx.meta["version_resolution"]["function_version_check"]
+                if "version_resolution" in ctx.meta and "verify_version" in ctx.meta["version_resolution"] and "function" in ctx.meta["version_resolution"]["verify_version"]:
+                    resolve_version = ctx.meta["version_resolution"]["verify_version"]['function']
                 else:
-                    raise Exception("Missing field meta.version_resolution.function_version_check in beet.json or beet.yaml")
+                    raise Exception("Missing field meta.version_resolution.verify_version.function in beet.json or beet.yaml")
 
                 i = 0
                 vers_check = False
@@ -174,6 +181,100 @@ def function_version_check(ctx: Context):
                 print(bcolors.FAIL + f"An exception occured whilst applying version check to function:{bcolors.WARNING} {lib_namespace}:{file_data['name']}!" + bcolors.ENDC)
                 print(bcolors.FAIL + "Exception: " + str(e) + bcolors.ENDC)
                 exit()
+
+#-------------------------------------------------------
+
+def advancement_version_check(ctx: Context):
+    """Check if an advancement is part of the latest instance"""
+    for file_data in datapack_files:
+        try:
+
+            # check if we have all meta keys
+            if not ('version_resolution' in ctx.meta and 'verify_version' in ctx.meta['version_resolution'] and 'advancement' in ctx.meta['version_resolution']['verify_version'] and 'objective' in ctx.meta['version_resolution']['verify_version']['advancement']):
+                raise Exception('Missing key meta.version_resolution.verify_version.advancement.objective in beet config file!')
+            
+            if not 'score_holder' in ctx.meta['version_resolution']['verify_version']['advancement']:
+                raise Exception('Missing key meta.version_resolution.verify_version.advancement.objective in beet config file!')
+            
+            # don't do anything when advancement resolution is disabled
+            if 'enabled' in ctx.meta['version_resolution']['verify_version']['advancement'] and not ctx.meta['version_resolution']['verify_version']['advancement']['enabled']:
+                return
+
+            if isinstance(file_data['file'], Advancement):
+                data = file_data['file'].data
+
+                # faulty advancement warning
+                if not "criteria" in data:
+                    print(bcolors.WARNING + f"No key 'criteria' found in advancement: {lib_namespace}:{file_data['name']}!" + bcolors.ENDC)
+                    continue
+                
+                has_key = False
+                for key in data['criteria']:
+                    has_key = True
+                    
+                    # create a conditions field if it doesn't already exist
+                    if not 'conditions' in data['criteria'][key]:
+                        data['criteria'][key]['conditions'] = {}
+
+                    # make sure the player field is a list
+                    if 'player' in data['criteria'][key]['conditions']:
+
+                        # if there is already a single condition set, convert it to a list so we can add another one
+                        if isinstance(data['criteria'][key]['conditions']['player'], dict):
+                            condition = data['criteria'][key]['conditions']['player']
+                            data['criteria'][key]['conditions']['player'] = []
+                            data['criteria'][key]['conditions']['player'].append({
+                                "condition": "minecraft:entity_properties",
+                                "entity": "this",
+                                "predicate": condition
+                            })
+
+                    else:
+                        data['criteria'][key]['conditions']['player'] = []
+
+                    # add a new player condition (this will be the score check)
+                    data['criteria'][key]['conditions']['player'].append(
+                    {
+                        "condition": "minecraft:value_check",
+                        "value": {
+                            "type": "minecraft:score",
+                            "target": {
+                                "type": "minecraft:fixed",
+                                "name": ctx.meta['version_resolution']['verify_version']['advancement']['score_holder']
+                            },
+                            "score": ctx.meta['version_resolution']['verify_version']['advancement']['objective']
+                        },
+                        "range": version['patch']
+                    })
+
+                # print a warning for a faulty advancement
+                if not has_key:
+                    print(bcolors.WARNING + f"No key requirement found in advancement: {lib_namespace}:{file_data['name']}!" + bcolors.ENDC)
+                    continue
+                
+
+        except Exception as e:
+            print(bcolors.FAIL + f"An exception occured whilst applying version check to advancement:{bcolors.WARNING} {lib_namespace}:{file_data['name']}!" + bcolors.ENDC)
+            print(bcolors.FAIL + "Exception: " + str(e) + bcolors.ENDC)
+            exit()
+
+"""
+"player": [
+					{
+						"condition": "minecraft:value_check",
+						"value": {
+							"type": "minecraft:score",
+							"target": {
+								"type": "minecraft:fixed",
+								"name": "#tbs-$version$.debug_enabled"
+							},
+							"score": "tbs.version_control"
+						},
+						"range": $patch-nbr$
+					}
+				]
+"""
+
 
 #-------------------------------------------------------
 
