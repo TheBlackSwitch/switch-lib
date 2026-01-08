@@ -5,6 +5,6 @@
         }
     },
     "rewards": {
-        "function": "#theblackswitch:events/inventory_changed"
+        "function": "theblackswitch:events/inventory_changed"
     }
 }

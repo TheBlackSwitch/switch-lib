@@ -1,2 +1,2 @@
 execute unless function theblackswitch:v2.0/patch-0/version_control/is_latest run return fail
-advancement revoke @s only theblackswitch:v2.0/patch-0/v2.0/patch-0/events/inventory_changed
+execute as @a[tag=tbs.inventory_changed] at @s run function theblackswitch:v2.0/patch-0/events/reset_inventory_changed/nested_execute_0

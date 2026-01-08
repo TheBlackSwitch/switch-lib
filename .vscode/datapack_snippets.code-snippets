@@ -42,6 +42,13 @@
             "${2}"
         ]
     },
+    "comment_sub_heading": {
+        "prefix": ">> comment sub-heading",
+        "body": [
+            "##-------${1:<comment>}-------",
+            "${2}"
+        ]
+    },
     "bolt_file_template": {
         "prefix": ">> file template (BOLT)",
         "body": [

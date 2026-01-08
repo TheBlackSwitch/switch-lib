@@ -8,7 +8,7 @@ scoreboard players set #tbs-$version$.debug_enabled tbs.server_data 0
 execute if entity @a[tag=tbs.debug] run scoreboard players set #tbs-$version$.debug_enabled tbs.server_data 1
 
 # Debug startup message
-@debug << {text:" Switch-Lib $version$ $patch$ loaded!"}
+@debug << {text:"Switch-Lib $version$ $patch$ loaded!"}
 
 # Inits
 function theblackswitch:player_id/init

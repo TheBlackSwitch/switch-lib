@@ -1,1 +1,1 @@
-scoreboard players set #tbs-v2.0.enabled.slow_tick tbs.server_data 1
+scoreboard players set #tbs-$version$.enabled.slow_tick tbs.server_data 1

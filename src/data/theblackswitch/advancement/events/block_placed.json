@@ -5,6 +5,6 @@
         }
     },
     "rewards": {
-        "function": "#theblackswitch:trigger/block_placed"
+        "function": "theblackswitch:events/block_placed"
     }
 }
