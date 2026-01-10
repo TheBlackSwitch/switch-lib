@@ -42,13 +42,23 @@ def beet_default(ctx: Context):
         prefix = ctx.meta['debug_lines']['prefix']
         suffix = ctx.meta['debug_lines']['suffix']
 
+        # loop through each line of each function file
         for name, function in ctx.data.functions.items():
             curr_line = 0
             for line in function.lines:
+
+                result = line
+
+                # replace debug aliases
                 if re.search(r"@debug *<< *", line):
                     result = re.sub(r"@debug *<< *", prefix, line)
                     result += suffix
-                    function.lines[curr_line] = result
+
+                # fix 'run execute' sometimes appearing
+                result = re.sub(r"([^n]) run execute", r"\g<1>", result)
+
+                # apply the changes
+                function.lines[curr_line] = result
                 curr_line+=1
 
 
