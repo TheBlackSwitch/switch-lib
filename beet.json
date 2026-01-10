@@ -1,7 +1,7 @@
 {
     "data_pack": {
         "load": ["src"],
-        "name": "Switch Lib"
+        "name": "SwitchLib"
     },
     "pipeline": [
         "plugins.debug_lines",

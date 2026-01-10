@@ -104,19 +104,24 @@ def find_files(ctx: Context):
 
                 if file_type == Function:
 
+                    
                     # check if this function should be resolved
+                    index = 0
                     for i in file.lines: # type: ignore
                         if "@noresolve" in i:
-                            file.lines.remove(i) # type: ignore
+                            file.lines[index] = i.replace("@noresolve", "") # type: ignore
                             should_resolve = False
                             break
+                        index+=1
 
                     # check if this function should be version checked
+                    index = 0
                     for i in file.lines: # type: ignore
                         if "@noverify" in i:
-                            file.lines.remove(i) # type: ignore
+                            file.lines[index] = i.replace("@noverify", "") # type: ignore
                             should_verify = False
                             break
+                        index+=1
 
                 elif file.extension == ".json":
 
@@ -129,7 +134,7 @@ def find_files(ctx: Context):
                         if not file.data["verify"]: # type: ignore
                             should_verify = False
                         del file.data["verify"] # type: ignore
-            
+
                 datapack_files.append({
                     "type": file_type,
                     "name": name,
@@ -150,7 +155,7 @@ def function_version_check(ctx: Context):
 
     for file_data in datapack_files:
         if file_data['type'] == Function and file_data['verify']:
-                
+            print(file_data['name']) 
             try:
                 if "version_resolution" in ctx.meta and "verify_version" in ctx.meta["version_resolution"] and "function" in ctx.meta["version_resolution"]["verify_version"]:
                     resolve_version = ctx.meta["version_resolution"]["verify_version"]['function']
@@ -180,7 +185,7 @@ def function_version_check(ctx: Context):
             except Exception as e:
                 print(bcolors.FAIL + f"An exception occured whilst applying version check to function:{bcolors.WARNING} {lib_namespace}:{file_data['name']}!" + bcolors.ENDC)
                 print(bcolors.FAIL + "Exception: " + str(e) + bcolors.ENDC)
-                exit()
+                exit()           
 
 #-------------------------------------------------------
 
