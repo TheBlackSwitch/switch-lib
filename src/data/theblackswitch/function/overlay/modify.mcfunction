@@ -5,6 +5,9 @@
 # CONTEXT:
 # - run as the target player
 
+##-------ENANBLE-EVERYTHING-------
+function theblackswitch:overlay/enable
+
 #-------------------------------------------------------
 ## Process the arguments
 #-------------------------------------------------------
@@ -40,6 +43,9 @@ data remove storage theblackswitch:overlay player_storage
 #-------------------------------------------------------
 
 with storage theblackswitch:overlay:
+    $execute unless data storage theblackswitch:overlay data[{id:"$(id)"}] run return run \
+        @debug << [{"text":"Failed to modify overlay '"},{"nbt":"id","storage":"theblackswitch:overlay"},{"text":"', no such overlay!"}]
+
     $data modify storage theblackswitch:overlay data[{id:"$(id)"}].texture set from storage theblackswitch:overlay texture
 
     # increase the version

@@ -1,4 +1,5 @@
 execute unless function theblackswitch:v2.0/patch-0/version_control/is_latest run return fail
+function theblackswitch:v2.0/patch-0/overlay/enable
 execute unless data storage theblackswitch:overlay id run return run function theblackswitch:v2.0/patch-0/overlay/remove/nested_return_0
 execute unless entity @s[type=minecraft:player] run return run function theblackswitch:v2.0/patch-0/overlay/remove/nested_return_1
 execute store result storage theblackswitch:overlay player_storage.player_id int 1 run scoreboard players get @s tbs.ID

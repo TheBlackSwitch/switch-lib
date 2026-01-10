@@ -5,4 +5,4 @@ scoreboard players set @s tbs.easing.prev_z 0
 scoreboard players set @s tbs.easing.prev_yaw 0
 scoreboard players set @s tbs.easing.prev_pitch 0
 
-scoreboard players remove .tbs.easing_entity_count tbs.server_data 1
+scoreboard players remove #tbs.easing_entity_count tbs.server_data 1

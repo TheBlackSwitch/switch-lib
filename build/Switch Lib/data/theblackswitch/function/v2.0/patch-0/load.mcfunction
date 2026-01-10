@@ -5,6 +5,7 @@ execute if entity @a[tag=tbs.debug] run scoreboard players set #tbs-v2.0.debug_e
 execute if score #tbs-v2.0.debug_enabled tbs.server_data matches 1 run tellraw @a[tag=tbs.debug] ["", {text: "[Debug]: ", color: "yellow", bold: true}, {text: "Switch-Lib v2.0 patch-0 loaded!"}]
 function theblackswitch:v2.0/patch-0/player_id/init
 function theblackswitch:v2.0/patch-0/slow_tick/init
+function theblackswitch:v2.0/patch-0/easing/load
 scoreboard objectives add temp dummy
 scoreboard objectives add tbs.server_data dummy
 scoreboard objectives add tbs.math dummy

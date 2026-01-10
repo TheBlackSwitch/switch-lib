@@ -9,6 +9,8 @@
 
 ## PASSED THROUGH STORAGE: theblackswitch:overlay
 
+##-------ENANBLE-EVERYTHING-------
+function theblackswitch:overlay/enable
 
 #-------------------------------------------------------
 ## Process the arguments
@@ -20,7 +22,7 @@ execute unless data storage theblackswitch:overlay texture run return:
     return fail
 
 execute unless data storage theblackswitch:overlay priority run return:
-    @debug << {"text":"Failed to apply overlay, missing field texture!"}
+    @debug << {"text":"Failed to apply overlay, missing field priority!"}
     return fail
 
 execute unless data storage theblackswitch:overlay id run return:

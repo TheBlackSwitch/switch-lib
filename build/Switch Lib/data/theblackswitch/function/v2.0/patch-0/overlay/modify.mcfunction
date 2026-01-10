@@ -1,4 +1,5 @@
 execute unless function theblackswitch:v2.0/patch-0/version_control/is_latest run return fail
+function theblackswitch:v2.0/patch-0/overlay/enable
 execute unless data storage theblackswitch:overlay id run return run function theblackswitch:v2.0/patch-0/overlay/modify/nested_return_0
 execute unless data storage theblackswitch:overlay texture run return run function theblackswitch:v2.0/patch-0/overlay/modify/nested_return_1
 execute unless entity @s[type=minecraft:player] run return run function theblackswitch:v2.0/patch-0/overlay/modify/nested_return_2

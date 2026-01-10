@@ -13,7 +13,7 @@ execute if entity @a[tag=tbs.debug] run scoreboard players set #tbs-$version$.de
 # Inits
 function theblackswitch:player_id/init
 function theblackswitch:slow_tick/init
-#function theblackswitch:easing/internal/load
+function theblackswitch:easing/load
 
 # scoreboards
 scoreboard objectives add temp dummy

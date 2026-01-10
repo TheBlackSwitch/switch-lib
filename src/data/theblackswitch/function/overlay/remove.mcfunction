@@ -6,6 +6,9 @@
 
 ## PASSED THROUGH STORAGE: theblackswitch:overlay
 
+##-------ENANBLE-EVERYTHING-------
+function theblackswitch:overlay/enable
+
 #-------------------------------------------------------
 ## Process the arguments
 #-------------------------------------------------------

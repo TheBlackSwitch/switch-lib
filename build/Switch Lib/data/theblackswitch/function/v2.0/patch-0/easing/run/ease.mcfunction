@@ -13,10 +13,10 @@ scoreboard players operation .t temp = @s tbs.easing.duration
 scoreboard players operation .t temp -= @s tbs.easing.current_tick
 scoreboard players operation .t temp *= .10000 temp
 scoreboard players operation .t temp /= @s tbs.easing.duration
-execute if score @s tbs.easing.ease matches 1 store result score .x temp run function theblackswitch:v2.0/patch-0/easing/internal/functions/ease_in
-execute if score @s tbs.easing.ease matches 2 store result score .x temp run function theblackswitch:v2.0/patch-0/easing/internal/functions/ease_out
-execute if score @s tbs.easing.ease matches 3 store result score .x temp run function theblackswitch:v2.0/patch-0/easing/internal/functions/ease_in_out
-execute if score @s tbs.easing.ease matches 4 store result score .x temp run function theblackswitch:v2.0/patch-0/easing/internal/functions/linear
+execute if score @s tbs.easing.ease matches 1 store result score .x temp run function theblackswitch:v2.0/patch-0/easing/functions/ease_in
+execute if score @s tbs.easing.ease matches 2 store result score .x temp run function theblackswitch:v2.0/patch-0/easing/functions/ease_out
+execute if score @s tbs.easing.ease matches 3 store result score .x temp run function theblackswitch:v2.0/patch-0/easing/functions/ease_in_out
+execute if score @s tbs.easing.ease matches 4 store result score .x temp run function theblackswitch:v2.0/patch-0/easing/functions/linear
 scoreboard players operation .x temp /= .10 temp
 scoreboard players operation .curr_x temp = @s tbs.easing.x
 scoreboard players operation .curr_x temp *= .x temp
@@ -48,9 +48,10 @@ scoreboard players operation @s tbs.easing.prev_y = .curr_y temp
 scoreboard players operation @s tbs.easing.prev_z = .curr_z temp
 scoreboard players operation @s tbs.easing.prev_yaw = .curr_yaw temp
 scoreboard players operation @s tbs.easing.prev_pitch = .curr_pitch temp
-data modify entity @s teleport_duration set value 5
-function theblackswitch:v2.0/patch-0/easing/internal/teleport with storage theblackswitch:temp easing.displacement
+data modify entity @s teleport_duration set value 2
+function theblackswitch:v2.0/patch-0/easing/run/teleport with storage theblackswitch:temp easing.displacement
 execute store success entity @s OnGround byte 1 store success score @s tbs.easing.on_ground_toggle unless score @s tbs.easing.on_ground_toggle matches 1
-execute if score @s tbs.easing.current_tick matches 0 run function theblackswitch:v2.0/patch-0/easing/internal/reset
-scoreboard players remove @s tbs.easing.current_tick 5
+execute if score @s tbs.easing.current_tick matches 0 if score @s tbs.easing.callback_id matches 0.. run function theblackswitch:v2.0/patch-0/easing/run/handle_callback
+execute if score @s tbs.easing.current_tick matches 0 run function theblackswitch:v2.0/patch-0/easing/run/reset
+scoreboard players remove @s tbs.easing.current_tick 1
 execute if score @s tbs.easing.current_tick matches ..0 run scoreboard players set @s tbs.easing.current_tick 0
