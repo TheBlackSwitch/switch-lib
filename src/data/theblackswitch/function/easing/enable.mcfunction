@@ -1,0 +1,1 @@
+scoreboard players set #tbs-$version$.enabled.easing tbs.server_data 1

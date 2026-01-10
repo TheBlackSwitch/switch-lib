@@ -39,6 +39,9 @@ execute unless data storage theblackswitch:easing pitch run return:
     @debug << {"text":"Failed to init easing, missing field pitch!"}
     return fail
 
+# enable easing
+function theblackswitch:easing/enable
+
 # Store the easing variables
 execute store result score @s tbs.easing.duration run data get storage theblackswitch:easing duration 1
 execute store result score @s tbs.easing.current_tick run data get storage theblackswitch:easing duration 1
@@ -71,7 +74,6 @@ execute if data storage theblackswitch:easing callback:
     # increase the current id
     scoreboard players add #current tbs.easing.callback_id 1
 
-
 #-------------------------------------------------------
 ## Start the easing
 #-------------------------------------------------------
@@ -86,11 +88,4 @@ execute at @s run function theblackswitch:easing/run/ease
 ## Reset the arguments
 #-------------------------------------------------------
 
-data remove storage theblackswitch:easing duration
-data remove storage theblackswitch:easing x
-data remove storage theblackswitch:easing y
-data remove storage theblackswitch:easing z
-data remove storage theblackswitch:easing yaw
-data remove storage theblackswitch:easing pitch
-data remove storage theblackswitch:easing ease
-data remove storage theblackswitch:easing callback
+schedule function theblackswitch:easing/run/clear_arguments 1t replace

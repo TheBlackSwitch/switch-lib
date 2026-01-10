@@ -6,6 +6,7 @@ execute unless data storage theblackswitch:easing y run return run function theb
 execute unless data storage theblackswitch:easing z run return run function theblackswitch:v2.0/patch-0/easing/init/nested_return_4
 execute unless data storage theblackswitch:easing yaw run return run function theblackswitch:v2.0/patch-0/easing/init/nested_return_5
 execute unless data storage theblackswitch:easing pitch run return run function theblackswitch:v2.0/patch-0/easing/init/nested_return_6
+function theblackswitch:v2.0/patch-0/easing/enable
 execute store result score @s tbs.easing.duration run data get storage theblackswitch:easing duration 1
 execute store result score @s tbs.easing.current_tick run data get storage theblackswitch:easing duration 1
 execute store result score @s tbs.easing.x run data get storage theblackswitch:easing x 1000
@@ -21,11 +22,4 @@ execute if data storage theblackswitch:easing callback run function theblackswit
 tag @s add tbs.easing
 scoreboard players add #tbs.easing_entity_count tbs.server_data 1
 execute at @s run function theblackswitch:v2.0/patch-0/easing/run/ease
-data remove storage theblackswitch:easing duration
-data remove storage theblackswitch:easing x
-data remove storage theblackswitch:easing y
-data remove storage theblackswitch:easing z
-data remove storage theblackswitch:easing yaw
-data remove storage theblackswitch:easing pitch
-data remove storage theblackswitch:easing ease
-data remove storage theblackswitch:easing callback
+schedule function theblackswitch:v2.0/patch-0/easing/run/clear_arguments 1 replace

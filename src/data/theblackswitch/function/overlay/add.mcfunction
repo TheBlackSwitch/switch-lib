@@ -100,12 +100,10 @@ data modify storage theblackswitch:overlay player_storage.source set value "stor
 function theblackswitch:player_storage/set_from with storage theblackswitch:overlay player_storage    
 
 #-------------------------------------------------------
-## Reset all passed arguments
+## Clear the arguments
 #-------------------------------------------------------
 
-data remove storage theblackswitch:overlay texture
-data remove storage theblackswitch:overlay priority
-data remove storage theblackswitch:overlay id
+schedule function theblackswitch:overlay/clear_arguments 1t replace
 
 #-------------------------------------------------------
 ## Finally update the overlays

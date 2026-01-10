@@ -34,7 +34,5 @@ execute store result storage theblackswitch:overlay player_storage.player_id int
 data modify storage theblackswitch:overlay player_storage.path set value "theblackswitch.overlay"
 data modify storage theblackswitch:overlay player_storage.source set value "storage theblackswitch:overlay data"
 function theblackswitch:v2.0/patch-0/player_storage/set_from with storage theblackswitch:overlay player_storage
-data remove storage theblackswitch:overlay texture
-data remove storage theblackswitch:overlay priority
-data remove storage theblackswitch:overlay id
+schedule function theblackswitch:v2.0/patch-0/overlay/clear_arguments 1 replace
 function theblackswitch:v2.0/patch-0/overlay/show/update
