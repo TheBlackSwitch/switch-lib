@@ -17,93 +17,93 @@
     // }
     // things for my library
 
-    "theblackswitch:v2.0/patch-0": {
-        "body": "theblackswitch:v2.0/patch-0",
-        "prefix": "theblackswitch:v2.0/patch-0"
+    "theblackswitch:\\$version\\$/\\$patch\\$": {
+        "body": "theblackswitch:\\$version\\$/\\$patch\\$",
+        "prefix": "theblackswitch:\\$version\\$/\\$patch\\$"
     },
-    "theblackswitch:v2.0": {
-        "body": "theblackswitch:v2.0",
-        "prefix": "theblackswitch:v2.0"
+    "theblackswitch:\\$version\\$": {
+        "body": "theblackswitch:\\$version\\$",
+        "prefix": "theblackswitch:\\$version\\$"
     },
-    "v2.0": {
-        "body": "v2.0",
-        "prefix": "v2.0"
+    "\\$version\\$": {
+        "body": "\\$version\\$",
+        "prefix": "\\$version\\$"
     },
-    "patch-0": {
-        "body": "patch-0",
-        "prefix": "patch-0"
+    "\\$patch\\$": {
+        "body": "\\$patch\\$",
+        "prefix": "\\$patch\\$"
     },
 
     // Player ID system
     "movement backward_left": {
         "prefix": ["if movement backward_left", "movement backward_left"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/backward_left,predicate=theblackswitch:v2.0/patch-0/movement/backward_left|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/backward_left,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/backward_left|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement backward_right": {
         "prefix": ["if movement backward_right", "movement backward_right"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/backward_right,predicate=theblackswitch:v2.0/patch-0/movement/backward_right|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/backward_right,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/backward_right|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement backward": {
         "prefix": ["if movement backward", "movement backward"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/backward,predicate=theblackswitch:v2.0/patch-0/movement/backward|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/backward,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/backward|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement forward_left": {
         "prefix": ["if movement forward_left", "movement forward_left"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/forward_left,predicate=theblackswitch:v2.0/patch-0/movement/forward_left|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/forward_left,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/forward_left|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement forward_right": {
         "prefix": ["if movement forward_right", "movement forward_right"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/forward_right,predicate=theblackswitch:v2.0/patch-0/movement/forward_right|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/forward_right,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/forward_right|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement forward": {
         "prefix": ["if movement forward", "movement forward"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/forward,predicate=theblackswitch:v2.0/patch-0/movement/forward|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/forward,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/forward|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement jump": {
         "prefix": ["if movement jump", "movement jump"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/jump,predicate=theblackswitch:v2.0/patch-0/movement/jump|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/jump,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/jump|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement left": {
         "prefix": ["if movement left", "movement left"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/left,predicate=theblackswitch:v2.0/patch-0/movement/left|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/left,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/left|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement none": {
         "prefix": ["if movement none", "movement none"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/none,predicate=theblackswitch:v2.0/patch-0/movement/none|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/none,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/none|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement right": {
         "prefix": ["if movement right", "movement right"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/right,predicate=theblackswitch:v2.0/patch-0/movement/right|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/right,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/right|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement sneak": {
         "prefix": ["if movement sneak", "movement sneak"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/sneak,predicate=theblackswitch:v2.0/patch-0/movement/sneak|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/sneak,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/sneak|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
     "movement sprint": {
         "prefix": ["if movement sprint", "movement sprint"],
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/movement/sprint,predicate=theblackswitch:v2.0/patch-0/movement/sprint|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/movement/sprint,predicate=theblackswitch:\\$version\\$/\\$patch\\$/movement/sprint|}",
         "description": "Switch-Lib [USER]: Check for movement buttons",
         "scope": "mcfunction"
     },
@@ -135,11 +135,11 @@
             "Search ID Check",
             "SIC",
             "Player ID check",
-            "if predicate theblackswitch:v2.0/patch-0/player_id/match_search",
-            "predicate=theblackswitch:v2.0/patch-0/player_id/match_search"
+            "if predicate theblackswitch:\\$version\\$/\\$patch\\$/player_id/match_search",
+            "predicate=theblackswitch:\\$version\\$/\\$patch\\$/player_id/match_search"
         ],
         "scope": "mcfunction",
-        "body": "${1|if predicate theblackswitch:v2.0/patch-0/player_id/match_search,predicate=theblackswitch:v2.0/patch-0/player_id/match_search,predicate=theblackswitch:v2.0/patch-0/player_id/match_search\\,limit=1|}",
+        "body": "${1|if predicate theblackswitch:\\$version\\$/\\$patch\\$/player_id/match_search,predicate=theblackswitch:\\$version\\$/\\$patch\\$/player_id/match_search,predicate=theblackswitch:\\$version\\$/\\$patch\\$/player_id/match_search\\,limit=1|}",
         "description": "Check if the current entity's id matches the #search id score"
     },
     "#search": {"prefix": "#search","body": "#search","scope": "#search"},
@@ -166,7 +166,7 @@
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
             "data modify storage ${1:theblackswitch:temp} player_storage.result set ${3:value}",
-            "function #theblackswitch:v2.0/player_storage/get with storage ${1:theblackswitch:temp} player_storage"
+            "function #theblackswitch:\\$version\\$/player_storage/get with storage ${1:theblackswitch:temp} player_storage"
         ],
         "description": "Switch-Lib [USER]: Get data from the player's storage and put it in a result storage",
         "scope": "mcfunction"
@@ -177,7 +177,7 @@
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
             "data modify storage ${1:theblackswitch:temp} player_storage.result set ${3:value}",
-            "function #theblackswitch:v2.0/player_storage/insert with storage ${1:theblackswitch:temp} player_storage"
+            "function #theblackswitch:\\$version\\$/player_storage/insert with storage ${1:theblackswitch:temp} player_storage"
         ],
         "description": "Switch-Lib [USER]: Get data from the player's storage and put it in any data consumer",
         "scope": "mcfunction"
@@ -187,7 +187,7 @@
         "body": [
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
-            "function #theblackswitch:v2.0/player_storage/remove with storage ${1:theblackswitch:temp} player_storage"
+            "function #theblackswitch:\\$version\\$/player_storage/remove with storage ${1:theblackswitch:temp} player_storage"
         ],
         "description": "Switch-Lib [USER]: Remove data from the player's storage",
         "scope": "mcfunction"
@@ -198,7 +198,7 @@
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
             "data modify storage ${1:theblackswitch:temp} player_storage.value set ${3:value}",
-            "function #theblackswitch:v2.0/player_storage/set_value with storage ${1:theblackswitch:temp} player_storage"
+            "function #theblackswitch:\\$version\\$/player_storage/set_value with storage ${1:theblackswitch:temp} player_storage"
         ],
         "description": "Switch-Lib [USER]: Store a certain value into the player's storage",
         "scope": "mcfunction"
@@ -209,7 +209,7 @@
             "execute store result storage ${1:theblackswitch:temp} player_storage.player_id int 1 run scoreboard players get ${2:@s} tbs.ID",
             "data modify storage ${1:theblackswitch:temp} player_storage.path set ${3:value}",
             "data modify storage ${1:theblackswitch:temp} player_storage.source set ${3:value}",
-            "function #theblackswitch:v2.0/player_storage/set_from with storage ${1:theblackswitch:temp} player_storage"
+            "function #theblackswitch:\\$version\\$/player_storage/set_from with storage ${1:theblackswitch:temp} player_storage"
         ],
         "description": "Switch-Lib [USER]: Get data from a source and store it in the player's storage",
         "scope": "mcfunction"
@@ -221,7 +221,7 @@
         "prefix": ["create overlay","add overlay"],
         "body": [
             "data merge storage theblackswitch:overlay {\"texture\":$1,\"id\":$2,\"priority\":\"${3|override,notification,conditional,persistent|}\"}",
-            "function #theblackswitch:v2.0/overlay/add"
+            "function #theblackswitch:\\$version\\$/overlay/add"
         ],
         "description": "Switch-Lib [USER]: Create a new overlay",
         "scope": "mcfunction"
@@ -230,7 +230,7 @@
         "prefix": ["modify overlay","edit overlay"],
         "body": [
             "data merge storage theblackswitch:overlay {\"texture\":$1,\"id\":$2}",
-            "function #theblackswitch:v2.0/overlay/modify"
+            "function #theblackswitch:\\$version\\$/overlay/modify"
         ],
         "description": "Switch-Lib [USER]: Modify the texture of an overlay",
         "scope": "mcfunction"
@@ -239,7 +239,7 @@
         "prefix": ["remove overlay","delete overlay"],
         "body": [
             "data merge storage theblackswitch:overlay {\"id\":$1}",
-            "function #theblackswitch:v2.0/overlay/remove"
+            "function #theblackswitch:\\$version\\$/overlay/remove"
         ],
         "description": "Switch-Lib [USER]: Remove an overlay",
         "scope": "mcfunction"
@@ -250,7 +250,7 @@
         "prefix": ["init easing","start easing"],
         "body": [
             "data merge storage theblackswitch:overlay {duration:$1,x:$2,y:$3,z:$4,yaw:$5,pitch:$6,ease:${7|linear,ease_in,ease_out,ease_in_out|},${8|callback:|}}",
-            "function #theblackswitch:v2.0/easing/init"
+            "function #theblackswitch:\\$version\\$/easing/init"
         ],
         "description": "Switch-Lib [USER]: Start easing this entity",
         "scope": "mcfunction"
@@ -258,7 +258,7 @@
     "stop easing": {
         "prefix": ["init easing","start easing"],
         "body": [
-            "function #theblackswitch:v2.0/easing/stop"
+            "function #theblackswitch:\\$version\\$/easing/stop"
         ],
         "description": "Switch-Lib [USER]: Start easing this entity",
         "scope": "mcfunction"
@@ -270,7 +270,7 @@
         "body": [
             "scoreboard players set #precision tbs.math $1",
             "scoreboard players operation #a tbs.math = $2",
-            "$3function #theblackswitch:v2.0/math/sqrt"
+            "$3function #theblackswitch:\\$version\\$/math/sqrt"
         ],
         "description": "Switch-Lib [USER]: Start easing this entity",
         "scope": "mcfunction"
