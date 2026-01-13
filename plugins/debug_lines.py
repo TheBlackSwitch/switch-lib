@@ -8,6 +8,7 @@
 from beet import Context
 import json as json
 import re
+from beet.contrib.find_replace import find_replace
 
 #-------------------------------------------------------
 ## Main Pipeline
@@ -27,8 +28,8 @@ class bcolors:
 # Runs during the build before mecha to support custom commands / modifiers
 def beet_default(ctx: Context):
 
-    try:
-
+    """try:"""
+    if True:
 
         if not "debug_lines" in ctx.meta:
             raise Exception("No key \"debug_lines\" found in beet.meta!")
@@ -42,7 +43,17 @@ def beet_default(ctx: Context):
         prefix = ctx.meta['debug_lines']['prefix']
         suffix = ctx.meta['debug_lines']['suffix']
 
-        # loop through each line of each function file
+        ctx.require(find_replace(data_pack={"match":"*"}, substitute={"find": r"@debug << ([\[\{].*[\}\]])", "replace": fr"{prefix}\g<1>{suffix}"}))
+        ctx.require(find_replace(data_pack={"match":"*"}, substitute={"find": r"([^n]) run execute", "replace": r"\g<1>"}))
+
+
+    """except Exception as e:
+        print(bcolors.FAIL + "An exception occured whilst trying to apply debug lines.")
+        print("Exception: " + str(e) + bcolors.ENDC)
+        exit()"""
+
+"""
+# loop through each line of each function file
         for name, function in ctx.data.functions.items():
             curr_line = 0
             for line in function.lines:
@@ -55,14 +66,9 @@ def beet_default(ctx: Context):
                     result += suffix
 
                 # fix 'run execute' sometimes appearing
-                result = re.sub(r"([^n]) run execute", r"\g<1>", result)
+                result = re.sub(r"([^n]) run execute", r"\\g<1>", result)
 
                 # apply the changes
                 function.lines[curr_line] = result
                 curr_line+=1
-
-
-    except Exception as e:
-        print(bcolors.FAIL + "An exceoption occured whilst trying to apply debug lines.")
-        print("Exception: " + str(e) + bcolors.ENDC)
-        exit()
+"""

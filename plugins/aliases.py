@@ -8,6 +8,7 @@
 from beet import Context, DataPack, Function,  FunctionTag, TagFile, ItemModifier, LootTable, JsonFile
 import json as json
 import re
+from beet.contrib.find_replace import find_replace
 
 #-------------------------------------------------------
 ## Main Pipeline
@@ -26,7 +27,6 @@ class bcolors:
 
 # Runs during the build before mecha to support custom commands / modifiers
 def beet_default(ctx: Context):
-
     try:
         if not "aliases" in ctx.meta:
             raise Exception("No key \"aliases\" found in beet.meta!")
@@ -43,21 +43,10 @@ def beet_default(ctx: Context):
             else:
                 count = 0
 
-            for name, file_data in ctx.data.all("*"):
-                if isinstance(file_data, Function):
+            ctx.require(find_replace(data_pack={"match": "*"}, resource_pack={"match": "*"}, substitute={"find": alias['regex'], "replace": alias['replace']}))
+            
 
-                    index = 0
-                    for line in file_data.lines:
-                        line = re.sub(alias['regex'], alias['replace'], line, count)
-                        file_data.lines[index] = line                     
-                        index+=1
-                
-                elif isinstance(file_data, JsonFile):
-                    data = json.dumps(file_data.data)
-                    data = re.sub(alias['regex'], alias['replace'], data, count)
-                    file_data.data = json.loads(data)
-                    
     except Exception as e:
-        print(bcolors.FAIL + "An exceoption occured whilst trying to apply aliases")
+        print(bcolors.FAIL + "An exception occured whilst trying to apply aliases")
         print("Exception: " + str(e) + bcolors.ENDC)
         exit()

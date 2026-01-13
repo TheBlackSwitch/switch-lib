@@ -263,24 +263,6 @@ def advancement_version_check(ctx: Context):
             print(bcolors.FAIL + "Exception: " + str(e) + bcolors.ENDC)
             exit()
 
-"""
-"player": [
-					{
-						"condition": "minecraft:value_check",
-						"value": {
-							"type": "minecraft:score",
-							"target": {
-								"type": "minecraft:fixed",
-								"name": "#tbs-$version$.debug_enabled"
-							},
-							"score": "tbs.version_control"
-						},
-						"range": $patch-nbr$
-					}
-				]
-"""
-
-
 #-------------------------------------------------------
 
 def resolve_aliases(ctx: Context):
@@ -316,7 +298,7 @@ def resolve_aliases(ctx: Context):
 #-------------------------------------------------------
 
 def check_resolve_refrence(path: str, filna: str, check_file_type=False, file_type=None):
-    """Check if a refrence should be resolved by looking at the resolved state of the targetted file"""
+    """Check if a refrence should be resolved by looking at the resolved state of the targeted file"""
     for f in datapack_files:
         if f['name'] == path:
             if check_file_type:
