@@ -4,7 +4,8 @@
         "version": "2.0.0"
     },
     "cache": {
-        "source": "/build",
+        "rp_source": "/build",
+        "dp_source": "/build",
         "output": "/export",
         "combine": false
     },

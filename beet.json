@@ -11,7 +11,7 @@
     "id": "theblackswitch",
     "name": "theblackswitch",
     "description": "A useful datapack library that I use for almost all my projects",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "require": [
         "bolt",
         "bolt_expressions"

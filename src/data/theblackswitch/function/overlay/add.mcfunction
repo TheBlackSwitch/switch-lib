@@ -57,6 +57,8 @@ execute store result storage theblackswitch:overlay curr_overlay.priority int 1 
 ## Get the current overlays from the player storage
 #-------------------------------------------------------
 
+@debug << {"text":"Playerstorage Get"}
+
 # get the current data from the player storage
 execute store result storage theblackswitch:overlay player_storage.player_id int 1 run scoreboard players get @s tbs.ID
 data modify storage theblackswitch:overlay player_storage.path set value "theblackswitch.overlay"
@@ -77,10 +79,14 @@ execute if score #success temp matches 1.. run return:
 ## Apply the overlay
 #-------------------------------------------------------
 
+@debug << {"text":"split"}
+
 # split the array in a part before the current overlay and a part after the current overlay
 data modify storage theblackswitch:overlay post_insert set from storage theblackswitch:overlay data
 data remove storage theblackswitch:overlay pre_insert
 function theblackswitch:overlay/apply_storage/split
+
+@debug << {"text":"concat"}
 
 # combine all of the parts
 data remove storage theblackswitch:overlay data
