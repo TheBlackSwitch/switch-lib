@@ -1,6 +1,8 @@
 {
     "data_pack": {
-        "load": ["src"],
+        "load": [
+            "src"
+        ],
         "name": "SwitchLib"
     },
     "pipeline": [
@@ -19,7 +21,9 @@
     "output": "build",
     "meta": {
         "bolt": {
-            "entrypoint": ["theblackswitch:main"]
+            "entrypoint": [
+                "theblackswitch:main"
+            ]
         },
         "version_resolution": {
             "verify_version": {

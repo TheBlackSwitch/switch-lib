@@ -21,6 +21,6 @@
     }
   },
   "rewards": {
-    "function": "theblackswitch:v2.0/patch-1/player_id/assign_id"
+    "function": "theblackswitch:v2.0/patch-1/events/init_player"
   }
 }

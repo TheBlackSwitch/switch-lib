@@ -155,7 +155,7 @@ def function_version_check(ctx: Context):
 
     for file_data in datapack_files:
         if file_data['type'] == Function and file_data['verify']:
-            print(file_data['name']) 
+            #print(file_data['name']) 
             try:
                 if "version_resolution" in ctx.meta and "verify_version" in ctx.meta["version_resolution"] and "function" in ctx.meta["version_resolution"]["verify_version"]:
                     resolve_version = ctx.meta["version_resolution"]["verify_version"]['function']

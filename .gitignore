@@ -6,3 +6,4 @@ venv/
 __pycache__/
 # paint-dot-net edit files which we don't need
 *.pdn
+log_terminal_cache.json

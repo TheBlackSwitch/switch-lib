@@ -1,7 +1,6 @@
 ## This function runs on inventory change or when any changes happen to the overlay
-execute unless score #tbs-$version$.enabled.overlay tbs.server_data matches 1 run return fail # don't do anything when not enabled
 
-@debug << {"text":"UPDATE!"}
+execute unless score #tbs-$version$.enabled.overlay tbs.server_data matches 1 run return fail # don't do anything when not enabled
 
 # select this player to search for later
 scoreboard players operation #search tbs.ID = @s tbs.ID
@@ -12,11 +11,17 @@ scoreboard players operation #search tbs.ID = @s tbs.ID
 
 function theblackswitch:overlay/show/reset_item
 
-@debug << {"text":"RESET ITEM!"}
-
 #-------------------------------------------------------
 ## Get the data from the player's storage
 #-------------------------------------------------------
+
+# Reset the data for this player
+data modify storage theblackswitch:overlay data set value []
+data remove storage theblackswitch:overlay head
+data remove storage theblackswitch:overlay chest
+data remove storage theblackswitch:overlay legs
+data remove storage theblackswitch:overlay feet
+data remove storage theblackswitch:overlay equippable_reconstruct
 
 # get the current data from the player storage
 execute store result storage theblackswitch:overlay player_storage.player_id int 1 run scoreboard players get @s tbs.ID
@@ -35,8 +40,6 @@ data modify storage theblackswitch:overlay feet set from storage theblackswitch:
 ## Create items for empty slots
 #-------------------------------------------------------
 
-@debug << {"text":"CREATE EMPTY ITEMS!"}
-
 execute unless items entity @s armor.head * if data storage theblackswitch:overlay data[0] run item replace entity @s armor.head with minecraft:poisonous_potato[minecraft:item_model="minecraft:air",minecraft:custom_data={"tbs.clear_inventory":true,"tbs.clear_hotbar":true,"tbs.clear_when_dropped":true,"tbs.clear_misc":true},minecraft:equippable={"slot":"head","equip_sound":"minecraft:intentionally_empty"},!minecraft:food,minecraft:tooltip_display={"hide_tooltip":true}]
 
 execute unless items entity @s armor.chest * if data storage theblackswitch:overlay data[1] run item replace entity @s armor.chest with minecraft:poisonous_potato[minecraft:item_model="minecraft:air",minecraft:custom_data={"tbs.clear_inventory":true,"tbs.clear_hotbar":true,"tbs.clear_when_dropped":true,"tbs.clear_misc":true},minecraft:equippable={"slot":"chest","equip_sound":"minecraft:intentionally_empty"},!minecraft:food,minecraft:tooltip_display={"hide_tooltip":true}]
@@ -49,8 +52,6 @@ execute unless items entity @s armor.feet * if data storage theblackswitch:overl
 ## Apply the overlays
 #-------------------------------------------------------
 
-@debug << {"text":"APPLY OVERLAY:"}
-
 # summon a chest mincart and move the items in there so we can modify them
 execute summon chest_minecart:
 
@@ -61,23 +62,17 @@ execute summon chest_minecart:
     item replace entity @s container.3 from entity @a[predicate=theblackswitch:player_id/match_search,limit=1] armor.feet
 
     ##-------HELMET-SLOT-------
-    @debug << {"text":"HELMET!"}
     function theblackswitch:overlay/show/update/helmet
 
     ##-------CHEST-SLOT-------
-    @debug << {"text":"CHEST!"}
     function theblackswitch:overlay/show/update/chest
 
     ##-------LEGS-SLOT-------
-    @debug << {"text":"LEGS!"}
     function theblackswitch:overlay/show/update/legs
 
     ##-------FEET-SLOT-------
-    @debug << {"text":"FEET!"}
     function theblackswitch:overlay/show/update/feet
     
 
     # remove this minecart and it's items
     function theblackswitch:overlay/show/kill_minecart
-
-@debug << {"text":"FINISH!"}

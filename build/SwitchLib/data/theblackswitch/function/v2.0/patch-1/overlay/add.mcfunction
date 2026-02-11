@@ -15,7 +15,6 @@ execute if data storage theblackswitch:overlay {priority: "notification"} run sc
 execute if data storage theblackswitch:overlay {priority: "override"} run scoreboard players set #priority temp 3
 execute if score #priority temp matches -1 run return run function theblackswitch:v2.0/patch-1/overlay/add/nested_return_4
 execute store result storage theblackswitch:overlay curr_overlay.priority int 1 run scoreboard players get #priority temp
-execute if score #tbs-v2.0.debug_enabled tbs.server_data matches 1 run tellraw @a[tag=tbs.debug] ["", {text: "[Debug]: ", color: "yellow", bold: true}, {text: "Playerstorage Get"}]
 execute store result storage theblackswitch:overlay player_storage.player_id int 1 run scoreboard players get @s tbs.ID
 data modify storage theblackswitch:overlay player_storage.path set value "theblackswitch.overlay"
 data modify storage theblackswitch:overlay player_storage.result set value "theblackswitch:overlay data"
@@ -23,16 +22,13 @@ function theblackswitch:v2.0/patch-1/player_storage/get with storage theblackswi
 data remove storage theblackswitch:overlay player_storage
 execute store success score #success temp run function theblackswitch:v2.0/patch-1/overlay/apply_storage/verify_id with storage theblackswitch:overlay
 execute if score #success temp matches 1.. run return run function theblackswitch:v2.0/patch-1/overlay/add/nested_return_5
-execute if score #tbs-v2.0.debug_enabled tbs.server_data matches 1 run tellraw @a[tag=tbs.debug] ["", {text: "[Debug]: ", color: "yellow", bold: true}, {text: "split"}]
 data modify storage theblackswitch:overlay post_insert set from storage theblackswitch:overlay data
 data remove storage theblackswitch:overlay pre_insert
 function theblackswitch:v2.0/patch-1/overlay/apply_storage/split
-execute if score #tbs-v2.0.debug_enabled tbs.server_data matches 1 run tellraw @a[tag=tbs.debug] ["", {text: "[Debug]: ", color: "yellow", bold: true}, {text: "concat"}]
 data remove storage theblackswitch:overlay data
 data modify storage theblackswitch:overlay data set from storage theblackswitch:overlay pre_insert
 data modify storage theblackswitch:overlay data append from storage theblackswitch:overlay curr_overlay
 function theblackswitch:v2.0/patch-1/overlay/apply_storage/concat_post_insert
-execute if score #tbs-v2.0.debug_enabled tbs.server_data matches 1 run tellraw @a[tag=tbs.debug] ["", {text: "[Debug]: ", color: "yellow", bold: true}, {text: "Successfully created a new overlay!"}]
 execute store result storage theblackswitch:overlay player_storage.player_id int 1 run scoreboard players get @s tbs.ID
 data modify storage theblackswitch:overlay player_storage.path set value "theblackswitch.overlay"
 data modify storage theblackswitch:overlay player_storage.source set value "storage theblackswitch:overlay data"
