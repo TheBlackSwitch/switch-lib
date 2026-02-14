@@ -409,6 +409,7 @@ def resolve_refrences(ctx: Context):
                     result = re.sub(rf"(\"?value\"? *?\"?)({lib_namespace}):([^\s\"]*\"?)", rf"\g<1>\g<2>$@$:\g<3>", result)
 
                     # handle other refrence types
+                    result = resolve_with_regex(fr"()(#{lib_namespace}):([^\s\"]+)", result, file_data['name'])
                     result = resolve_with_regex(fr"()({lib_namespace}):([^\s\"]+)", result, file_data['name'])
 
                     file_data['file'].lines[i] = result

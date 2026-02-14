@@ -1,13 +1,15 @@
 {
     "pack": {
         "min_format": [
-            94,
-            1
+            80,
+            0
         ],
         "max_format": [
             94,
             1
         ],
-        "description": ""
+        "pack_format": 94,
+        "supported_formats": [80, 94],
+        "description": "Yet another datapack library :P Made by theblackswitch"
     }
 }
