@@ -6,7 +6,7 @@ execute if data entity @s Items[{Slot:2b}].components."minecraft:equippable" run
 
 # Else check for vanilla minecraft items
 execute if items entity @s container.0 minecraft:leather_leggings run return run data modify storage theblackswitch:overlay equippable_reconstruct set value {"slot":"legs","asset_id":"minecraft:diamond","equip_sound":"minecraft:intentionally_empty"}
-execute if items entity @s container.0 minecraft:copper_leggings run return run data modify storage theblackswitch:overlay equippable_reconstruct set value {"slot":"legs","asset_id":"minecraft:copper","equip_sound":"minecraft:intentionally_empty"}
+execute if items entity @s container.0 #theblackswitch:copper_leggings run return run data modify storage theblackswitch:overlay equippable_reconstruct set value {"slot":"legs","asset_id":"minecraft:copper","equip_sound":"minecraft:intentionally_empty"}
 execute if items entity @s container.0 minecraft:chainmail_leggings run return run data modify storage theblackswitch:overlay equippable_reconstruct set value {"slot":"legs","asset_id":"minecraft:chainmail","equip_sound":"minecraft:intentionally_empty"}
 execute if items entity @s container.0 minecraft:iron_leggings run return run data modify storage theblackswitch:overlay equippable_reconstruct set value {"slot":"legs","asset_id":"minecraft:iron","equip_sound":"minecraft:intentionally_empty"}
 execute if items entity @s container.0 minecraft:golden_leggings run return run data modify storage theblackswitch:overlay equippable_reconstruct set value {"slot":"legs","asset_id":"minecraft:gold","equip_sound":"minecraft:intentionally_empty"}

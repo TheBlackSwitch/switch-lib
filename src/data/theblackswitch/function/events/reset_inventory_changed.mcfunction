@@ -1,7 +1,7 @@
 
 # internal event users
 execute as @a[tag=tbs.inventory_changed] at @s:
-    function theblackswitch:overlay/show/init_update
+    function theblackswitch:overlay/show/update
     function theblackswitch:clear_item/inventory_change
 
     function #theblackswitch:events/inventory_changed

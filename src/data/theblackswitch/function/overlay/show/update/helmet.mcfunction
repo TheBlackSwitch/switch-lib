@@ -6,6 +6,7 @@
 execute unless data storage theblackswitch:overlay data[0] run return:
     execute unless items entity @a[predicate=theblackswitch:player_id/match_search,limit=1] armor.head *[minecraft:custom_data~{"tbs.overlay":{"applied":1b}}] run return fail   
 
+    # Remove the dummy item if used
     execute if data entity @s Items[{Slot:0b,components:{"minecraft:custom_data":{"tbs.clear_inventory":true}}}] run return:
         item replace entity @a[predicate=theblackswitch:player_id/match_search,limit=1] armor.head with air
         function theblackswitch:overlay/show/kill_minecart
@@ -18,6 +19,7 @@ execute unless data storage theblackswitch:overlay data[0] run return:
     execute unless data entity @s Items[{Slot:0b,components:{"minecraft:custom_data":{"tbs.overlay":{"equippable":"none"}}}}]:
         data modify entity @s Items[{Slot:0b}].components."minecraft:equippable" set from entity @s Items[{Slot:0b}].components."minecraft:custom_data"."tbs.overlay".equippable
 
+    # Reset the custom data
     data remove entity @s Items[{Slot:0b}].components."minecraft:custom_data"."tbs.overlay"
 
     # move the modified item back to the player

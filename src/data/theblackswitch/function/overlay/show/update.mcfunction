@@ -1,4 +1,5 @@
 ## This function runs on inventory change or when any changes happen to the overlay
+
 execute unless score #tbs-$version$.enabled.overlay tbs.server_data matches 1 run return fail # don't do anything when not enabled
 
 # select this player to search for later
@@ -13,6 +14,14 @@ function theblackswitch:overlay/show/reset_item
 #-------------------------------------------------------
 ## Get the data from the player's storage
 #-------------------------------------------------------
+
+# Reset the data for this player
+data modify storage theblackswitch:overlay data set value []
+data remove storage theblackswitch:overlay head
+data remove storage theblackswitch:overlay chest
+data remove storage theblackswitch:overlay legs
+data remove storage theblackswitch:overlay feet
+data remove storage theblackswitch:overlay equippable_reconstruct
 
 # get the current data from the player storage
 execute store result storage theblackswitch:overlay player_storage.player_id int 1 run scoreboard players get @s tbs.ID

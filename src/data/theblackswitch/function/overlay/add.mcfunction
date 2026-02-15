@@ -88,8 +88,6 @@ data modify storage theblackswitch:overlay data set from storage theblackswitch:
 data modify storage theblackswitch:overlay data append from storage theblackswitch:overlay curr_overlay
 function theblackswitch:overlay/apply_storage/concat_post_insert
 
-@debug << {"text":"Successfully created a new overlay!"}
-
 #-------------------------------------------------------
 ## Put everything back into the player storage
 #-------------------------------------------------------

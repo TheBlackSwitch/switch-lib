@@ -1,0 +1,1 @@
+function #theblackswitch:events/init_player
