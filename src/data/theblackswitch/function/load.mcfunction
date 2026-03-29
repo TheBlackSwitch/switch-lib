@@ -10,6 +10,15 @@ execute if entity @a[tag=tbs.debug] run scoreboard players set #tbs-$version$.de
 # Debug startup message
 @debug << {text:"Switch-Lib $version$ $patch$ loaded!"}
 
+# A storage that can hold data about all (once) loaded pack versions (useful when updating some datapack)
+function theblackswitch:loaded/set_pack_version {
+    pack_id:'switch_lib',
+    major:$major-nbr$,
+    minor:$minor-nbr$,
+    patch:$patch-nbr$,
+    suffix:-1
+}
+
 # Inits
 function theblackswitch:player_id/init
 function theblackswitch:slow_tick/init

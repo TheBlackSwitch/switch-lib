@@ -1,0 +1,8 @@
+{
+    "values": [
+        {
+            "id": "theblackswitch:loaded/set_pack_version",
+            "required": false
+        }
+    ]
+}
