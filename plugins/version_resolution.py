@@ -277,6 +277,8 @@ def resolve_aliases(ctx: Context):
         try:
             if file_data['type'] == Function:
                 for i in range(len(file_data['file'].lines)):
+                    file_data['file'].lines[i] = file_data['file'].lines[i].replace("$major-nbr$", f"{version['major']}")
+                    file_data['file'].lines[i] = file_data['file'].lines[i].replace("$minor-nbr$", f"{version['minor']}")
                     file_data['file'].lines[i] = file_data['file'].lines[i].replace("$version$", f"v{version['major']}.{version['minor']}")
                     file_data['file'].lines[i] = file_data['file'].lines[i].replace("$patch$", f"patch-{version['patch']}")
                     file_data['file'].lines[i] = file_data['file'].lines[i].replace("$patch-nbr$", str(version['patch']))
@@ -284,6 +286,8 @@ def resolve_aliases(ctx: Context):
 
             elif file_data['file'].extension == ".json":
                 cont = json.dumps(file_data['file'].get_content())
+                cont = cont.replace("$major-nbr$", f"{version['major']}")
+                cont = cont.replace("$minor-nbr$", f"{version['minor']}")
                 cont = cont.replace("$version$", f"v{version['major']}.{version['minor']}")
                 cont = cont.replace("$patch-nbr$", str(version['patch']))
                 cont = cont.replace("$patch$", f"patch-{version['patch']}")
