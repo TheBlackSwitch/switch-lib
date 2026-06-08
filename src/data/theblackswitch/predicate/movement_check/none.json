@@ -5,11 +5,10 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-                "type_specific": {
-                    "type": "minecraft:player",
+                "minecraft:type_specific/player": {
                     "input": {
-                        "backward": false,
                         "forward": false,
+                        "backward": false,
                         "left": false,
                         "right": false
                     }
@@ -20,11 +19,12 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-                "type_specific": {
-                    "type": "minecraft:player",
+                "minecraft:type_specific/player": {
                     "input": {
+                        "forward": true,
                         "backward": true,
-                        "forward": true
+                        "left": false,
+                        "right": false
                     }
                 }
             }
@@ -33,9 +33,24 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-                "type_specific": {
-                    "type": "minecraft:player",
+                "minecraft:type_specific/player": {
                     "input": {
+                        "forward": true,
+                        "backward": true,
+                        "left": false,
+                        "right": false
+                    }
+                }
+            }
+        },
+        {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+                "minecraft:type_specific/player": {
+                    "input": {
+                        "forward": true,
+                        "backward": true,
                         "left": true,
                         "right": true
                     }
@@ -44,6 +59,3 @@
         }
     ]
 }
-
-    
-    
