@@ -2,11 +2,12 @@
     "condition": "minecraft:entity_properties",
     "entity": "this",
     "predicate": {
-        "minecraft:type_specific/player": {
+        "type_specific": {
+            "type": "minecraft:player",
             "input": {
                 "forward": false,
                 "backward": true,
-                "left": true,
+                "left": false,
                 "right": false
             }
         }
