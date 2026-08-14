@@ -6,7 +6,7 @@
 ## Imports
 #-------------------------------------------------------
 
-from beet import Context, DataPack, Function,  FunctionTag, TagFile, Advancement
+from beet import Context, DataPack, Function,  FunctionTag, TagFile, Advancement, NamespaceFile
 import json as json
 import re
 
@@ -97,56 +97,63 @@ def find_files(ctx: Context):
 
     try:
         for file_type in ctx.data[lib_namespace].keys():
-            for name, file in ctx.data[lib_namespace][file_type].items():
+            process_file_type(ctx, file_type, ctx.data[lib_namespace], is_overlay=False)
 
-                should_resolve = True
-                should_verify = True
-
-                if file_type == Function:
-
-                    
-                    # check if this function should be resolved
-                    index = 0
-                    for i in file.lines: # type: ignore
-                        if "@noresolve" in i:
-                            file.lines[index] = i.replace("@noresolve", "") # type: ignore
-                            should_resolve = False
-                            break
-                        index+=1
-
-                    # check if this function should be version checked
-                    index = 0
-                    for i in file.lines: # type: ignore
-                        if "@noverify" in i:
-                            file.lines[index] = i.replace("@noverify", "") # type: ignore
-                            should_verify = False
-                            break
-                        index+=1
-
-                elif file.extension == ".json":
-
-                    if "resolve" in file.data: # type: ignore
-                        if not file.data["resolve"]: # type: ignore
-                            should_resolve = False
-                        del file.data["resolve"] # type: ignore
-
-                    if "verify" in file.data: # type: ignore
-                        if not file.data["verify"]: # type: ignore
-                            should_verify = False
-                        del file.data["verify"] # type: ignore
-
-                datapack_files.append({
-                    "type": file_type,
-                    "name": name,
-                    "file": file,
-                    "resolve": should_resolve,
-                    "verify": should_verify
-                })
+        for curr_overlay in ctx.data.overlays.keys():
+            for file_type in ctx.data.overlays[curr_overlay][lib_namespace].keys():
+                process_file_type(ctx, file_type, ctx.data.overlays[curr_overlay][lib_namespace], is_overlay=True)
 
     except Exception as e:
         print(bcolors.FAIL + "An exception occured whilst searching for resolvable files!")
         print("Exception: " + str(e) + bcolors.ENDC)
         exit()
+
+def process_file_type(ctx: Context, file_type: type[NamespaceFile], location, is_overlay):
+    for name, file in location[file_type].items():
+        should_resolve = True
+        should_verify = True
+
+        if file_type == Function:
+
+            
+            # check if this function should be resolved
+            index = 0
+            for i in file.lines: # type: ignore
+                if "@noresolve" in i:
+                    file.lines[index] = i.replace("@noresolve", "") # type: ignore
+                    should_resolve = False
+                    break
+                index+=1
+
+            # check if this function should be version checked
+            index = 0
+            for i in file.lines: # type: ignore
+                if "@noverify" in i:
+                    file.lines[index] = i.replace("@noverify", "") # type: ignore
+                    should_verify = False
+                    break
+                index+=1
+
+        elif file.extension == ".json":
+
+            if "resolve" in file.data: # type: ignore
+                if not file.data["resolve"]: # type: ignore
+                    should_resolve = False
+                del file.data["resolve"] # type: ignore
+
+            if "verify" in file.data: # type: ignore
+                if not file.data["verify"]: # type: ignore
+                    should_verify = False
+                del file.data["verify"] # type: ignore
+
+        datapack_files.append({
+            "type": file_type,
+            "name": name,
+            "file": file,
+            "resolve": should_resolve,
+            "verify": should_verify,
+            "location": location
+        })
 
 #-------------------------------------------------------
 
@@ -456,8 +463,10 @@ def move_files(ctx: Context):
                 else:
                     new_name = f"v{version['major']}.{version['minor']}/patch-{version['patch']}/" + file_data['name']
 
-                ctx.data[lib_namespace][file_data['type']][new_name] = file_data['file']
-                del ctx.data[lib_namespace][file_data['type']][file_data['name']]
+                file_data["location"][file_data['type']][new_name] = file_data['file']
+                del file_data["location"][file_data['type']][file_data['name']]
+
+            
         except Exception as e:
             print(bcolors.FAIL + f"An exception occured whilst resolving path for file:{bcolors.WARNING} {lib_namespace}:{file_data['name']}!" + bcolors.ENDC)
             print(bcolors.FAIL + "Exception: " + str(e) + bcolors.ENDC)
