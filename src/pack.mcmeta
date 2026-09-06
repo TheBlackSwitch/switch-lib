@@ -1,13 +1,19 @@
 {
     "pack": {
         "min_format": [61, 0],
-        "max_format": [107, 1],
-        "pack_format": 107,
-        "supported_formats": [61, 107],
+        "max_format": [120, 0],
+        "pack_format": 120,
+        "supported_formats": [61, 120],
         "description": "Yet another datapack library :P Made by theblackswitch"
     },
     "overlays": {
         "entries": [
+            {
+                "directory": "backport_26.2",
+                "min_format": 0,
+                "max_format": [107, 1],
+                "formats": [0, 107]
+            },
             {
                 "directory": "backport_26.1.2",
                 "min_format": 0,

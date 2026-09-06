@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:entity_scores",
+  "entity": "this",
+  "scores": {
+    "tbs.ID": {
+      "type": "minecraft:score",
+      "target": {
+        "type": "minecraft:fixed",
+        "name": "#search"
+      },
+      "score": "tbs.ID",
+      "fallback": -1
+    }
+  }
+}

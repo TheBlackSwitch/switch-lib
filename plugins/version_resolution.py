@@ -215,11 +215,20 @@ def advancement_version_check(ctx: Context):
             if isinstance(file_data['file'], Advancement):
                 data = file_data['file'].data
 
+
                 # faulty advancement warning
                 if not "criteria" in data:
                     print(bcolors.WARNING + f"No key 'criteria' found in advancement: {lib_namespace}:{file_data['name']}!" + bcolors.ENDC)
                     continue
-                
+
+                # Check if this is for an older version
+                resolution_version = ">=26.3"
+                if 'resolution_version' in data:
+                    resolution_version = data['resolution_version']
+                    if resolution_version not in ['>=26.3','<=26.2']:
+                        print(bcolors.WARNING + f"Key 'resolution_version' in advancement: {lib_namespace}:{file_data['name']} must be one of (>=26.3 | <=26.2)!" + bcolors.ENDC)
+    
+    
                 has_key = False
                 for key in data['criteria']:
                     has_key = True
@@ -232,32 +241,69 @@ def advancement_version_check(ctx: Context):
                     if 'player' in data['criteria'][key]['conditions']:
 
                         # if there is already a single condition set, convert it to a list so we can add another one
-                        if isinstance(data['criteria'][key]['conditions']['player'], dict):
-                            condition = data['criteria'][key]['conditions']['player']
-                            data['criteria'][key]['conditions']['player'] = []
-                            data['criteria'][key]['conditions']['player'].append({
-                                "condition": "minecraft:entity_properties",
-                                "entity": "this",
-                                "predicate": condition
-                            })
+                        
+                        # ======= <=26.2 =======
+                        if resolution_version == "<=26.2":
+                            if isinstance(data['criteria'][key]['conditions']['player'], dict):
+                                condition = data['criteria'][key]['conditions']['player']
+                                data['criteria'][key]['conditions']['player'] = []
+                                data['criteria'][key]['conditions']['player'].append({
+                                    "condition": "minecraft:entity_properties",
+                                    "entity": "this",
+                                    "predicate": condition
+                                })
+
+                        # ======= >=26.3 =======
+                        elif resolution_version == ">=26.3":
+                            if data['criteria'][key]['conditions']['player']['type'] not in ["minecraft:all_of", "all_of"]:
+                                condition = data['criteria'][key]['conditions']['player']
+                                data['criteria'][key]['conditions']['player'] = {
+                                    "type": "minecraft:all_of",
+                                    "terms": [condition]
+                                }
 
                     else:
-                        data['criteria'][key]['conditions']['player'] = []
+                        if resolution_version == "<=26.2":
+                            data['criteria'][key]['conditions']['player'] = []
+                        else:
+                            data['criteria'][key]['conditions']['player'] = {
+                                "type": "minecraft:all_of",
+                                "terms": []
+                            }
 
                     # add a new player condition (this will be the score check)
-                    data['criteria'][key]['conditions']['player'].append(
-                    {
-                        "condition": "minecraft:value_check",
-                        "value": {
-                            "type": "minecraft:score",
-                            "target": {
-                                "type": "minecraft:fixed",
-                                "name": ctx.meta['version_resolution']['verify_version']['advancement']['score_holder']
+
+                    # ======= 26.2 =======
+                    if resolution_version == "<=26.2":
+                        data['criteria'][key]['conditions']['player'].append(
+                        {
+                            "condition": "minecraft:value_check",
+                            "value": {
+                                "type": "minecraft:score",
+                                "target": {
+                                    "type": "minecraft:fixed",
+                                    "name": ctx.meta['version_resolution']['verify_version']['advancement']['score_holder']
+                                },
+                                "score": ctx.meta['version_resolution']['verify_version']['advancement']['objective']
                             },
-                            "score": ctx.meta['version_resolution']['verify_version']['advancement']['objective']
-                        },
-                        "range": version['patch']
-                    })
+                            "range": version['patch']
+                        })
+
+                    # ======= 26.3 =======
+                    elif resolution_version == ">=26.3":
+                        print(data)
+                        data['criteria'][key]['conditions']['player']['terms'].append({
+                            "type": "minecraft:int_value_check",
+                            "value": {
+                                "type": "minecraft:score",
+                                "target": {
+                                    "type": "minecraft:fixed",
+                                    "name": ctx.meta['version_resolution']['verify_version']['advancement']['score_holder']
+                                },
+                                "score": ctx.meta['version_resolution']['verify_version']['advancement']['objective']
+                            },
+                            "test": version['patch']
+                        })
 
                 # print a warning for a faulty advancement
                 if not has_key:

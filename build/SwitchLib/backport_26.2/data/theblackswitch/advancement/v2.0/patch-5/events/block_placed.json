@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:value_check",
+            "value": {
+              "type": "minecraft:score",
+              "target": {
+                "type": "minecraft:fixed",
+                "name": "#v2.0"
+              },
+              "score": "tbs.version_control"
+            },
+            "range": 5
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "theblackswitch:v2.0/patch-5/events/block_placed"
+  },
+  "resolution_version": "<=26.2"
+}

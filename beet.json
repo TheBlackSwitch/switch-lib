@@ -13,18 +13,13 @@
     "id": "theblackswitch",
     "name": "theblackswitch",
     "description": "A useful datapack library that I use for almost all my projects",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "require": [
         "bolt",
         "bolt_expressions"
     ],
     "output": "build",
     "meta": {
-        "bolt": {
-            "entrypoint": [
-                "theblackswitch:main"
-            ]
-        },
         "version_resolution": {
             "verify_version": {
                 "function": "execute unless function theblackswitch:version_control/is_latest run return fail",

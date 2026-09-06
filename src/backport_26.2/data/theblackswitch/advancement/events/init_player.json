@@ -1,0 +1,11 @@
+{
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:tick"
+        }
+    },
+    "rewards": {
+        "function": "theblackswitch:events/init_player"
+    },
+    "resolution_version": "<=26.2"
+}

@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:int_value_check",
+              "value": {
+                "type": "minecraft:score",
+                "target": {
+                  "type": "minecraft:fixed",
+                  "name": "#v2.0"
+                },
+                "score": "tbs.version_control"
+              },
+              "test": 5
+            }
+          ]
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "theblackswitch:v2.0/patch-5/events/inventory_changed"
+  }
+}
