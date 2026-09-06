@@ -28,5 +28,5 @@ to write datapack features faster since I don't have to re-invent the wheel ever
 If you want to use this library or contribute, you can take a look at the [wiki](https://github.com/TheBlackSwitch/switch-lib/wiki/Home)
 
 # 📜License
-theblackswitch datapack-common-code © 2025 by theblackswitch is licensed under Creative Commons Attribution No Derivatives 4.0 International
+theblackswitch datapack-common-code © 2026 by theblackswitch is licensed under Creative Commons Attribution No Derivatives 4.0 International
 An exception is made for video content, which can be monetized. However, video creators must give appropriate credit by leaving a link to this page in the video
