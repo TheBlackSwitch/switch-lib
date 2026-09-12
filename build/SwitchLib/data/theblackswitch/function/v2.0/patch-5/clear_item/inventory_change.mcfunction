@@ -1,6 +1,5 @@
 execute unless function theblackswitch:v2.0/patch-5/version_control/is_latest run return fail
 execute unless score #tbs-v2.0.enabled.clear_item tbs.server_data matches 1 run return fail
-clear @s *[custom_data~{tbs.always_clear: true}]
 execute if items entity @s inventory.* *[custom_data~{tbs.clear_inventory: true}] run function theblackswitch:v2.0/patch-5/clear_item/inventory_change/nested_execute_0
 execute if items entity @s hotbar.* *[custom_data~{tbs.clear_hotbar: true}] run function theblackswitch:v2.0/patch-5/clear_item/inventory_change/nested_execute_1
 execute if items entity @s weapon.offhand *[custom_data~{tbs.clear_hotbar: true}] run item replace entity @s weapon.offhand with minecraft:air

@@ -1,9 +1,6 @@
 
 execute unless score #tbs-$version$.enabled.clear_item tbs.server_data matches 1 run return fail
 
-# Clear items in any slot
-clear @s *[custom_data~{"tbs.always_clear":true}]
-
 # Clear inventory slots only
 execute if items entity @s inventory.* *[custom_data~{"tbs.clear_inventory":true}]:
     for i in range(27):
